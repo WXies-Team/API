@@ -2,7 +2,7 @@
 <html lang="cn">
 
 <!-- Head -->
-<?php include('head.php'); ?>
+<?php include('https://www.wxies.cn/head.php'); ?>
 
 <style>
   /* Set the page height to 100vh (viewport height) */
@@ -66,9 +66,8 @@
   <div class="error-container">
     <img class="error-logo" src="https://www.wxies.cn/logo.png" alt="Logo">
     <div class="error-message">
-      <p>对不起，页面不存在！</p>
-      <p id="countdown-message">5秒后将自动跳转。</p>
-      <p>请返回<a href="https://www.wxies.cn" class="home-link">主页</a>或尝试其他链接。</p>
+      <p>WXies API</p>
+      <p id="countdown-message">5秒后将自动跳转至API文档。</p>
       <div class="countdown" id="countdown">5</div>
     </div>
   </div>
@@ -86,11 +85,11 @@
     }
 
     function updateCountdownMessage() {
-      document.getElementById('countdown-message').innerText = countdown + '秒后将自动跳转。';
+      document.getElementById('countdown-message').innerText = countdown + '秒后将自动跳转至API文档。';
     }
 
     function redirectAfterCountdown() {
-      window.location.href = 'https://www.example.com'; // Replace with your desired URL
+      window.location.href = 'https://doc.wxies.cn'; // Replace with your desired URL
     }
 
     setInterval(function () {
@@ -103,6 +102,9 @@
       }
     }, 1000); // Update every 1000 milliseconds (1 second)
   </script>
+    <!-- Footer -->
+    <footer>
+    <?php include 'https://www.wxies.cn/footer.php'; ?>
+  </footer>
 </body>
-
 </html>
