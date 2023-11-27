@@ -2,7 +2,7 @@
 <html lang="cn">
 
 <!-- Head -->
-<?php include('https://www.wxies.cn/head.php'); ?>
+<?php include('head.php'); ?>
 
 <style>
   /* Set the page height to 100vh (viewport height) */
@@ -102,9 +102,5 @@
       }
     }, 1000); // Update every 1000 milliseconds (1 second)
   </script>
-    <!-- Footer -->
-    <footer>
-    <?php include 'https://www.wxies.cn/footer.php'; ?>
-  </footer>
 </body>
 </html>
