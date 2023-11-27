@@ -44,11 +44,6 @@
     text-decoration: none;
   }
 
-  .countdown {
-    font-size: 18px;
-    margin-top: 20px;
-  }
-
   /* Footer styling */
   footer {
     background-color: #f0f0f0;
@@ -67,8 +62,8 @@
     <img class="error-logo" src="https://www.wxies.cn/logo.png" alt="Logo">
     <div class="error-message">
       <p>WXies API</p>
-      <p id="countdown-message">5秒后将自动跳转至API文档。</p>
-      <div class="countdown" id="countdown">5</div>
+      <p>将在 <span id="countdown">5</span> 秒后自动跳转到API文档</p>
+      <p>如果没有自动跳转，请点击<a href="https://doc.wxies.cn" class="home-link">这里</a>。</p>
     </div>
   </div>
   <!-- Footer -->
@@ -76,31 +71,27 @@
     <?php include 'footer.php'; ?>
   </footer>
 
-  <!-- JavaScript for countdown and redirection after 5 seconds -->
   <script>
+    // JavaScript倒计时
     var countdown = 5;
+    var countdownElement = document.getElementById('countdown');
 
     function updateCountdown() {
-      document.getElementById('countdown').innerText = countdown;
-    }
+      countdownElement.innerHTML = countdown;
+      countdown--;
 
-    function updateCountdownMessage() {
-      document.getElementById('countdown-message').innerText = countdown + '秒后将自动跳转至API文档。';
-    }
-
-    function redirectAfterCountdown() {
-      window.location.href = 'https://doc.wxies.cn'; // Replace with your desired URL
-    }
-
-    setInterval(function () {
-      if (countdown > 0) {
-        countdown--;
-        updateCountdown();
-        updateCountdownMessage();
+      if (countdown < 0) {
+        window.location.href = 'https://www.wxies.cn';
       } else {
-        redirectAfterCountdown();
+        setTimeout(updateCountdown, 1000);
       }
-    }, 1000); // Update every 1000 milliseconds (1 second)
+    }
+
+    // 页面加载后启动倒计时
+    document.addEventListener('DOMContentLoaded', function () {
+      updateCountdown();
+    });
   </script>
 </body>
+
 </html>
