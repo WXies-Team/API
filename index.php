@@ -81,7 +81,7 @@
       countdown--;
 
       if (countdown < 0) {
-        window.location.href = 'https://www.wxies.cn';
+        window.location.href = 'https://doc.wxies.cn';
       } else {
         setTimeout(updateCountdown, 1000);
       }
