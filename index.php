@@ -67,7 +67,7 @@
     <img class="error-logo" src="https://www.wxies.cn/logo.png" alt="Logo">
     <div class="error-message">
       <p>对不起，页面不存在！</p>
-      <p>5秒后将自动跳转。</p>
+      <p id="countdown-message">5秒后将自动跳转。</p>
       <p>请返回<a href="https://www.wxies.cn" class="home-link">主页</a>或尝试其他链接。</p>
       <div class="countdown" id="countdown">5</div>
     </div>
@@ -85,6 +85,10 @@
       document.getElementById('countdown').innerText = countdown;
     }
 
+    function updateCountdownMessage() {
+      document.getElementById('countdown-message').innerText = countdown + '秒后将自动跳转。';
+    }
+
     function redirectAfterCountdown() {
       window.location.href = 'https://www.example.com'; // Replace with your desired URL
     }
@@ -93,6 +97,7 @@
       if (countdown > 0) {
         countdown--;
         updateCountdown();
+        updateCountdownMessage();
       } else {
         redirectAfterCountdown();
       }
