@@ -1,14 +1,14 @@
 <?php
 
 // 设置变量
-$windows_version_name = $_POST["windows_version_name"] ?: "9.9.9";
-$linux_version_name = $_POST["linux_version_name"] ?: "3.2.7";
-$macos_version_name = $_POST["macos_version_name"] ?: "6.9.32";
-$version_code = $_POST["version_code"];
-$feature_code = $_POST["feature_code"];
-$pubilsh_num = $_POST["pubilsh_num" ?: "01"];
-$update_log = $_POST["update_log"];
-$backup_link_num = $_POST["backup_link_num"];
+$windows_version_name = $_POST["win"] ?: "9.9.9";
+$linux_version_name = $_POST["linux"] ?: "3.2.7";
+$macos_version_name = $_POST["macos"] ?: "6.9.32";
+$version_code = $_POST["vcode"];
+$feature_code = $_POST["fcode"];
+$pubilsh_num = $_POST["pnum" ?: "01"];
+$update_log = $_POST["log"];
+$backup_link_num = $_POST["blink"];
 
 // 替换链接
 $update_content = "Windows QQ_NT {$windows_version_name}.{$version_code} &\n";
