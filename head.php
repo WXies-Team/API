@@ -7,15 +7,4 @@
     <!-- favicon -->
     <link rel="shortcut icon" href="https://www.wxies.cn/images/favicons/favicon.png">
 
-    <!-- Pe-7 icon -->
-    <link href="css/pe-icon-7.css" rel="stylesheet" type="text/css" />
-
-    <!--Slider-->
-    <link rel="stylesheet" href="css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="css/owl.theme.default.min.css" />
-
-    <!-- css -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.min.css" rel="stylesheet" type="text/css" />
-
 </head>

@@ -59,7 +59,7 @@
 <body>
   <!-- Logo -->
   <div class="error-container">
-    <img class="error-logo" src="https://wxies.cn/logo.png" alt="Logo">
+    <img class="error-logo" src="https://www.wxies.cn/images/favicons/favicon.png" alt="Logo">
     <div class="error-message">
       <p>WXies API</p>
       <p>将在 <span id="countdown">5</span> 秒后自动跳转到API文档</p>
