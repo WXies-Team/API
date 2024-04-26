@@ -5,7 +5,7 @@
     <meta name="description" content="We Quest On and On">
     <meta name="keywords" content="唯蟹Team, Xies' Group, Blog233, HoratioWeb, lujing, jack">
     <!-- favicon -->
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="https://www.wxies.cn/images/favicons/favicon.png">
 
     <!-- Pe-7 icon -->
     <link href="css/pe-icon-7.css" rel="stylesheet" type="text/css" />
