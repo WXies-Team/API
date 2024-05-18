@@ -2,7 +2,15 @@
 <html lang="cn">
 
 <!-- Head -->
-<?php include('head.php'); ?>
+<head>
+    <meta charset="utf-8" />
+    <title>唯蟹 Team - We Quest On and On</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="We Quest On and On">
+    <meta name="keywords" content="唯蟹Team, Xies' Group, Blog233, HoratioWeb, lujing, jack">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="//wxies.cn/images/favicons/favicon.png">
+</head>
 
 <style>
   /* Set the page height to 100vh (viewport height) */
@@ -66,10 +74,6 @@
       <p>如果没有自动跳转，请点击<a href="https://doc.wxies.cn" class="home-link">这里</a>。</p>
     </div>
   </div>
-  <!-- Footer -->
-  <footer>
-    <?php include 'footer.php'; ?>
-  </footer>
 
   <script>
     // JavaScript倒计时
