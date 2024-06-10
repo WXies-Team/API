@@ -9,7 +9,7 @@ if ($qq != null)
 }
 else
 {
-    echo "请在url后加入?=QQ号";
+    echo "请在url后加入?qq=QQ号";
 }
 
 ?>
