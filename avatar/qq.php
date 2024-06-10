@@ -1,17 +1,7 @@
 <?php
 
 $qq = $_GET['qq'];
-$spec = $_GET["spec"] ?: "640";
 
-$link = "https://q.qlogo.cn/headimg_dl?dst_uin={$qq}&spec={$spec}";
-
-if ($qq != null)
-{
-    header("Location:$link"); // 302 跳转
-}
-else
-{
-    echo "请在url后加入?=QQ号";
-}
+$link = "https://q1.qlogo.cn/g?b=qq&nk={$qq}&s=640";
 
 ?>
