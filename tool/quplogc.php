@@ -44,7 +44,7 @@ $update_content .= "#QQ_NT_Windows\n";
 $update_content .= "#QQ_NT_MacOS\n";
 $update_content .= "#QQ_NT_Linux";
 // 输出到文件
-$file_name = "QQ_Update_Log_{$feature_code}.md";
+$file_name = "QQ_Update_Log_{$version_code}.md";
 file_put_contents($file_name, $update_content);
 
 // 文件下载
