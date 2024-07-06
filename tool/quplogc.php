@@ -14,11 +14,11 @@ $update_log = $_GET["log"];
 $backup_link_num = $_GET["blink"];
 
 // 替换链接
-$update_content = "Windows QQ_NT {$windows_version_name}.{$version_code} &\n";
-$update_content .= "MacOS QQ_NT {$macos_version_name}.{$version_code} &\n";
-$update_content .= "Linux QQ_NT {$linux_version_name}.{$version_code}\n";
-$update_content .= "\n官方更新内容：\n{$update_log}\n\n";
-$update_content .= "下载：\n";
+$update_content = "**Windows QQ_NT {$windows_version_name}.{$version_code} &**\n";
+$update_content .= "**MacOS QQ_NT {$macos_version_name}.{$version_code} &**\n";
+$update_content .= "**Linux QQ_NT {$linux_version_name}.{$version_code}**\n";
+$update_content .= "\n**官方更新内容：**\n{$update_log}\n\n";
+$update_content .= "**下载：**\n";
 $update_content .= "- Windows:\n";
 $update_content .= "[X86](https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x86_md5}/QQ{$windows_version_name}.{$version_code}_x86.exe) | [X64](https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x64_md5}/QQ{$windows_version_name}.{$version_code}_x64.exe) | [Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_arm_md5}/QQ{$windows_version_name}.{$version_code}_arm64.exe)\n";
 $update_content .= "- MacOS:\n";
@@ -30,7 +30,7 @@ $update_content .= "[LoongArch](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5
 // 备份
 if ($backup_link_num !== "") {
     $backup_link_num = intval($backup_link_num) ?: 0;
-    $update_content .= "\n备份：\n";
+    $update_content .= "\n**备份：**\n";
     $update_content .= "- Windows:\n";
     $update_content .= "[X86](https://t.me/linqiqi_backup/{$backup_link_num}) | [X64](https://t.me/linqiqi_backup/" . ++$backup_link_num . ") | [Arm](https://t.me/linqiqi_backup/" . ++$backup_link_num . ")\n";
     $update_content .= "- MacOS:\n";
