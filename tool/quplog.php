@@ -1,9 +1,9 @@
 <?php
 
 // 设置变量
-$windows_version_name = $_GET["win"] ?: "9.9.11";
-$linux_version_name = $_GET["linux"] ?: "3.2.9";
-$macos_version_name = $_GET["macos"] ?: "6.9.36";
+$windows_version_name = $_GET["win"] ?: "9.9.12";
+$linux_version_name = $_GET["linux"] ?: "3.2.10";
+$macos_version_name = $_GET["macos"] ?: "6.9.39";
 $version_code = $_GET["vcode"];
 $feature_code = $_GET["fcode"];
 $pubilsh_num = $_GET["pnum" ?: "01"];
