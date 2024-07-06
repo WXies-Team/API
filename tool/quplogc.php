@@ -2,7 +2,7 @@
 
 // 设置变量
 $windows_version_name = $_GET["win"] ?: "9.9.12";
-$linux_version_name = $_GET["linux"] ?: "3.2.9";
+$linux_version_name = $_GET["linux"] ?: "3.2.10";
 $macos_version_name = $_GET["macos"] ?: "6.9.39";
 $version_code = $_GET["vcode"];
 $winodws_x86_md5 = $_GET["w86"];
