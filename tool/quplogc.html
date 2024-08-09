@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="icon" href="https://q1.qlogo.cn/g?b=qq&nk=1115058004&s=640">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成QQ更新日志(版本号)</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            margin: 20px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], textarea {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        input[type="submit"] {
+            width: 50%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>生成QQ更新日志(版本号)</h1>
+        <form id="updateForm" action="https://api.wxies.cn/tool/quplogc.php" method="get" target="_blank">
+            <label for="win">Windows 大版本号：</label>
+            <input type="text" id="win" name="win" value="9.9.12"><br>
+            <label for="linux">Linux 大版本号：</label>
+            <input type="text" id="linux" name="linux" value="3.2.10"><br>
+            <label for="macos">macOS 大版本号：</label>
+            <input type="text" id="macos" name="macos" value="6.9.39"><br>
+            <label for="vcode">小版本号：</label>
+            <input type="text" id="vcode" name="vcode"><br>
+            <label for="fcode">Winodws X86 MD5：</label>
+            <input type="text" id="w86" name="w86"><br>
+            <label for="fcode">Winodws X64 MD5：</label>
+            <input type="text" id="w64" name="w64"><br>
+            <label for="fcode">Winodws Arm MD5：</label>
+            <input type="text" id="warm" name="warm"><br>
+            <label for="fcode">macOS MD5：</label>
+            <input type="text" id="mac" name="mac"><br>
+            <label for="fcode">Linux MD5：</label>
+            <input type="text" id="linuxc" name="linuxc"><br>
+            <label for="log">更新日志：</label>
+            <textarea id="log" name="log"></textarea><br>
+            <label for="blink">备份链接初始数字（不输入删除备份段）：</label>
+            <input type="text" id="blink" name="blink"><br>
+            <input type="submit" value="生成更新日志">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("updateForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            this.submit();
+        });
+    </script>
+</body>
+</html>
