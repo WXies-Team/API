@@ -20,7 +20,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            max-width: 700px;
             width: 90%;
             box-sizing: border-box;
         }
@@ -30,24 +30,36 @@
             text-align: center;
             color: #0078D4;
         }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            margin-top: 15px;
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
         }
-        input[type="text"], textarea {
+        .form-row label {
+            flex: 1 1 40%;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-row input[type="text"] {
+            flex: 1 1 55%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-row.full-width {
+            flex-direction: column;
+        }
+        .form-row.full-width textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-bottom: 10px;
             font-size: 14px;
-            box-sizing: border-box;
-        }
-        textarea {
-            resize: vertical;
             height: 100px;
+            resize: vertical;
+            box-sizing: border-box;
         }
         input[type="submit"] {
             background-color: #0078D4;
@@ -67,30 +79,15 @@
             h1 {
                 font-size: 20px;
             }
-            input[type="text"], textarea {
-                font-size: 12px;
+            .form-row {
+                flex-direction: column;
+            }
+            .form-row label, .form-row input[type="text"], .form-row.full-width textarea {
+                width: 100%;
+                flex: 1 1 100%;
             }
             input[type="submit"] {
                 font-size: 14px;
-            }
-        }
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 18px;
-            }
-            label {
-                font-size: 14px;
-            }
-            input[type="text"], textarea {
-                font-size: 12px;
-                padding: 8px;
-            }
-            input[type="submit"] {
-                font-size: 14px;
-                padding: 8px;
             }
         }
     </style>
@@ -99,39 +96,50 @@
     <div class="container">
         <h1>生成QQ更新日志(版本号)</h1>
         <form id="updateForm" action="https://api.wxies.cn/tool/quplogc.php" method="get" target="_blank">
-            <label for="win">Windows 大版本号：</label>
-            <input type="text" id="win" name="win">
-            
-            <label for="linux">Linux 大版本号：</label>
-            <input type="text" id="linux" name="linux">
-            
-            <label for="macos">macOS 大版本号：</label>
-            <input type="text" id="macos" name="macos">
-            
-            <label for="vcode">小版本号：</label>
-            <input type="text" id="vcode" name="vcode">
-            
-            <label for="w86">Windows X86 MD5：</label>
-            <input type="text" id="w86" name="w86">
-            
-            <label for="w64">Windows X64 MD5：</label>
-            <input type="text" id="w64" name="w64">
-            
-            <label for="warm">Windows Arm MD5：</label>
-            <input type="text" id="warm" name="warm">
-            
-            <label for="mac">macOS MD5：</label>
-            <input type="text" id="mac" name="mac">
-            
-            <label for="linuxc">Linux MD5：</label>
-            <input type="text" id="linuxc" name="linuxc">
-            
-            <label for="log">更新日志：</label>
-            <textarea id="log" name="log"></textarea>
-            
-            <label for="blink">备份链接初始数字（不输入删除备份段）：</label>
-            <input type="text" id="blink" name="blink">
-            
+            <div class="form-row">
+                <label for="win">Windows 大版本号：</label>
+                <input type="text" id="win" name="win">
+            </div>
+            <div class="form-row">
+                <label for="linux">Linux 大版本号：</label>
+                <input type="text" id="linux" name="linux">
+            </div>
+            <div class="form-row">
+                <label for="macos">macOS 大版本号：</label>
+                <input type="text" id="macos" name="macos">
+            </div>
+            <div class="form-row">
+                <label for="vcode">小版本号：</label>
+                <input type="text" id="vcode" name="vcode">
+            </div>
+            <div class="form-row">
+                <label for="w86">Windows X86 MD5：</label>
+                <input type="text" id="w86" name="w86">
+            </div>
+            <div class="form-row">
+                <label for="w64">Windows X64 MD5：</label>
+                <input type="text" id="w64" name="w64">
+            </div>
+            <div class="form-row">
+                <label for="warm">Windows Arm MD5：</label>
+                <input type="text" id="warm" name="warm">
+            </div>
+            <div class="form-row">
+                <label for="mac">macOS MD5：</label>
+                <input type="text" id="mac" name="mac">
+            </div>
+            <div class="form-row">
+                <label for="linuxc">Linux MD5：</label>
+                <input type="text" id="linuxc" name="linuxc">
+            </div>
+            <div class="form-row full-width">
+                <label for="log">更新日志：</label>
+                <textarea id="log" name="log"></textarea>
+            </div>
+            <div class="form-row full-width">
+                <label for="blink">备份链接初始数字（不输入删除备份段）：</label>
+                <input type="text" id="blink" name="blink">
+            </div>
             <input type="submit" value="生成更新日志">
         </form>
     </div>
