@@ -20,8 +20,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
+            max-width: 700px;
+            width: 90%;
             box-sizing: border-box;
         }
         h1 {
@@ -40,8 +40,8 @@
             margin-bottom: 5px;
             font-weight: bold;
         }
-        .form-row input[type="text"], .form-row textarea {
-            flex: 1 1 60%;
+        .form-row input[type="text"] {
+            flex: 1 1 55%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -51,14 +51,15 @@
         .form-row.full-width {
             flex-direction: column;
         }
-        .form-row.full-width label, 
-        .form-row.full-width input[type="text"], 
         .form-row.full-width textarea {
-            flex: 1 1 100%;
-        }
-        .form-row.full-width textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
             height: 100px;
             resize: vertical;
+            box-sizing: border-box;
         }
         input[type="submit"] {
             background-color: #0078D4;
@@ -76,37 +77,17 @@
         }
         @media (max-width: 768px) {
             h1 {
-                font-size: 22px;
+                font-size: 20px;
             }
             .form-row {
                 flex-direction: column;
             }
-            .form-row label, 
-            .form-row input[type="text"], 
-            .form-row textarea {
+            .form-row label, .form-row input[type="text"], .form-row.full-width textarea {
+                width: 100%;
                 flex: 1 1 100%;
             }
             input[type="submit"] {
                 font-size: 14px;
-            }
-        }
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 20px;
-            }
-            label {
-                font-size: 14px;
-            }
-            input[type="text"], textarea {
-                font-size: 12px;
-                padding: 8px;
-            }
-            input[type="submit"] {
-                font-size: 14px;
-                padding: 10px;
             }
         }
     </style>
