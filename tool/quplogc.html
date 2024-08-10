@@ -9,65 +9,52 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #e0f2f1;
-            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .container {
-            width: 90%;
-            max-width: 800px;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            text-align: center;
-            color: #00796b;
-            margin-bottom: 20px;
-            font-size: 28px;
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         form {
-            margin: 0;
+            margin: 20px;
             text-align: center;
         }
         label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
-            color: #333;
+            margin-bottom: 5px;
         }
         input[type="text"], textarea {
             width: calc(100% - 40px);
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 4px;
             box-sizing: border-box;
             text-align: center;
-            font-size: 14px;
-        }
-        input[type="text"]:focus, textarea:focus {
-            border-color: #00796b;
-            outline: none;
         }
         input[type="submit"] {
-            width: 60%;
-            padding: 12px;
-            background-color: #00796b;
+            width: 50%;
+            padding: 10px;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
         }
         input[type="submit"]:hover {
-            background-color: #004d40;
+            background-color: #45a049;
+        }
+        h1 {
+            text-align: center;
         }
     </style>
 </head>
@@ -83,15 +70,15 @@
             <input type="text" id="macos" name="macos"><br>
             <label for="vcode">小版本号：</label>
             <input type="text" id="vcode" name="vcode"><br>
-            <label for="w86">Windows X86 MD5：</label>
+            <label for="fcode">Winodws X86 MD5：</label>
             <input type="text" id="w86" name="w86"><br>
-            <label for="w64">Windows X64 MD5：</label>
+            <label for="fcode">Winodws X64 MD5：</label>
             <input type="text" id="w64" name="w64"><br>
-            <label for="warm">Windows Arm MD5：</label>
+            <label for="fcode">Winodws Arm MD5：</label>
             <input type="text" id="warm" name="warm"><br>
-            <label for="mac">macOS MD5：</label>
+            <label for="fcode">macOS MD5：</label>
             <input type="text" id="mac" name="mac"><br>
-            <label for="linuxc">Linux MD5：</label>
+            <label for="fcode">Linux MD5：</label>
             <input type="text" id="linuxc" name="linuxc"><br>
             <label for="log">更新日志：</label>
             <textarea id="log" name="log"></textarea><br>
@@ -100,5 +87,12 @@
             <input type="submit" value="生成更新日志">
         </form>
     </div>
+
+    <script>
+        document.getElementById("updateForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            this.submit();
+        });
+    </script>
 </body>
 </html>
