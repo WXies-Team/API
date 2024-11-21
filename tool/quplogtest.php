@@ -1,10 +1,7 @@
 <?php
 
 // 获取用户输入的 URL
-$windows_url = $_GET["win_url"];
-$linux_url = $_GET["linux_url"];
-$macos_url = $_GET["macos_url"];
-$version_code = $_GET["vcode"];
+$url = $_GET["url"];
 $update_log = $_GET["log"];
 $backup_link_num = $_GET["blink"];
 
