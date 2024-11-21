@@ -18,17 +18,17 @@ function extract_info($url, $pattern) {
     
     // 提取md5
     if (preg_match($pattern['md5'], $url, $matches)) {
-        $info['md5'] = $matches[1];
+        $info['md5'] = $matches[1]; // 提取到的MD5值
     }
 
     // 提取版本名
     if (preg_match($pattern['version_name'], $url, $matches)) {
-        $info['version_name'] = $matches[1];
+        $info['version_name'] = $matches[1]; // 提取到的版本名
     }
 
     // 提取版本号
     if (preg_match($pattern['version_code'], $url, $matches)) {
-        $info['version_code'] = $matches[1];
+        $info['version_code'] = $matches[1]; // 提取到的版本号
     }
 
     return $info;
@@ -54,8 +54,11 @@ $linux_version_name = $linux_info['version_name'];
 
 $version_code = $windows_x86_info['version_code']; // 所有平台使用同一个 version_code
 
-// 更新内容
-$update_content = "**Windows x86**: https://dldir1.qq.com/qqfile/qq/QQNT/{$windows_x86_md5}/QQ{$windows_version_name}.{$version_code}_x86.exe\n";
+// 保留原有的 update_content
+$update_content = $update_log; // 保留原始的内容
+
+// 添加动态链接内容
+$update_content .= "\n**Windows x86**: https://dldir1.qq.com/qqfile/qq/QQNT/{$windows_x86_md5}/QQ{$windows_version_name}.{$version_code}_x86.exe\n";
 $update_content .= "**Windows x64**: https://dldir1.qq.com/qqfile/qq/QQNT/{$windows_x64_md5}/QQ{$windows_version_name}.{$version_code}_x64.exe\n";
 $update_content .= "**Windows arm**: https://dldir1.qq.com/qqfile/qq/QQNT/{$windows_arm_md5}/QQ{$windows_version_name}.{$version_code}_arm64.exe\n";
 $update_content .= "**MacOS**: https://dldir1.qq.com/qqfile/qq/QQNT/{$macos_md5}/QQ_v{$macos_version_name}.{$version_code}.dmg\n";
