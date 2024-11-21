@@ -1,15 +1,7 @@
 <?php
 
 // 设置变量
-$windows_version_name = $_GET["win"];
-$linux_version_name = $_GET["linux"];
-$macos_version_name = $_GET["macos"];
-$version_code = $_GET["vcode"];
-$winodws_x86_md5 = $_GET["w86"];
-$winodws_x64_md5 = $_GET["w64"];
-$winodws_arm_md5 = $_GET["warm"];
-$macos_md5 = $_GET["mac"];
-$linux_md5 = $_GET["linuxc"];
+$url = $_GET["url"];
 $update_log = $_GET["log"];
 $backup_link_num = $_GET["blink"];
 
