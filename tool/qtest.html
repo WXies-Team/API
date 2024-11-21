@@ -96,9 +96,25 @@
     <div class="container">
         <h1>生成QQ更新日志(版本号)</h1>
         <form id="updateForm" action="https://api.wxies.cn/tool/quplogtest.php" method="get" target="_blank">
-            <div class="form-row full-width">
-                <label for="url">链接</label>
-                <textarea id="url" name="url"></textarea>
+            <div class="form-row">
+                <label for="link_windows_x86">Windows x86lj</label>
+                <input type="text" id="link_windows_x86" name="link_windows_x86">
+            </div>
+            <div class="form-row">
+                <label for="link_windows_x64">w64</label>
+                <input type="text" id="link_windows_x64" name="link_windows_x64">
+            </div>
+            <div class="form-row">
+                <label for="link_windows_arm">warm</label>
+                <input type="text" id="link_windows_arm" name="link_windows_arm">
+            </div>
+            <div class="form-row">
+                <label for="link_macos">macos</label>
+                <input type="text" id="link_macos" name="link_macos">
+            </div>
+            <div class="form-row">
+                <label for="link_linux">linux</label>
+                <input type="text" id="link_linux" name="link_linux">
             </div>
             <div class="form-row full-width">
                 <label for="log">更新日志：</label>
