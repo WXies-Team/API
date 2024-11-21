@@ -98,7 +98,7 @@ $update_content .= "#QQ_NT_Windows\n";
 $update_content .= "#QQ_NT_MacOS\n";
 $update_content .= "#QQ_NT_Linux\n";
 
-$file_name = "QQ_Update_Log_{$version_code}.txt";
+$file_name = "QQ_Update_Log_{$version_code}.html";
 file_put_contents($file_name, $update_content);
 
 header("Content-Disposition: attachment; filename=\"$file_name\"");
