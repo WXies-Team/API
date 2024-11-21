@@ -38,9 +38,15 @@ preg_match('/QQNT\/([a-z0-9]+)\/linuxqq_(\d+\.\d+\.\d+)-(\d+)/', $link_linux, $m
 $linux_md5 = $matches_linux[1];
 $linux_version_name = $matches_linux[2];
 
+if (!empty($windows_version_name)) {
 $update_content = "<b>Windows QQ_NT {$windows_version_name}.{$version_code} &</b>\n";
+}
+if (!empty($macos_version_name)) {
 $update_content .= "<b>MacOS QQ_NT {$macos_version_name}.{$version_code} &</b>\n";
+}
+if (!empty($linux_version_name)) {
 $update_content .= "<b>Linux QQ_NT {$linux_version_name}.{$version_code}</b>\n";
+}
 $update_content .= "\n<b>官方更新内容：</b>\n<blockquote>{$update_log}</blockquote>\n\n";
 $update_content .= "<b>下载：</b>\n";
 
