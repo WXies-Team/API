@@ -102,7 +102,7 @@ $file_name = "QQ_Update_Log_{$version_code}.txt";
 file_put_contents($file_name, $update_content);
 
 header("Content-Disposition: attachment; filename=\"$file_name\"");
-header("Content-Type: text/markdown");
+header("Content-Type: text/html");
 header("Content-Length: " . filesize($file_name));
 readfile($file_name);
 
