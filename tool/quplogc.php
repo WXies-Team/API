@@ -1,32 +1,59 @@
 <?php
 
-// 设置变量
-$windows_version_name = $_GET["win"];
-$linux_version_name = $_GET["linux"];
-$macos_version_name = $_GET["macos"];
-$version_code = $_GET["vcode"];
-$winodws_x86_md5 = $_GET["w86"];
-$winodws_x64_md5 = $_GET["w64"];
-$winodws_arm_md5 = $_GET["warm"];
-$macos_md5 = $_GET["mac"];
-$linux_md5 = $_GET["linuxc"];
+// 获取用户输入的 URL
+$url = $_GET["url"];
 $update_log = $_GET["log"];
 $backup_link_num = $_GET["blink"];
 
+// 定义正则表达式
+$pattern = [
+    'md5' => '/\/([a-f0-9]{8})\//i', // 提取8位md5值
+    'version_name' => '/(\d+\.\d+\.\d+)(?=\-\d+|\.dmg|\.exe)/i', // 提取版本名
+    'version_code' => '/(\d+)(?=\_x86|\_x64|\_arm|\_aarch64)/i' // 提取版本号
+];
+
+// 函数用来解析 URL
+function extract_info($url, $pattern) {
+    $info = [];
+    
+    // 提取md5
+    if (preg_match($pattern['md5'], $url, $matches)) {
+        $info['md5'] = $matches[1];
+    }
+
+    // 提取版本名
+    if (preg_match($pattern['version_name'], $url, $matches)) {
+        $info['version_name'] = $matches[1];
+    }
+
+    // 提取版本号
+    if (preg_match($pattern['version_code'], $url, $matches)) {
+        $info['version_code'] = $matches[1];
+    }
+
+    return $info;
+}
+
+// 提取 Windows, MacOS, 和 Linux 的信息
+$windows_info = extract_info($url, $pattern);
+$macos_info = extract_info($url, $pattern);
+$linux_info = extract_info($url, $pattern);
+
 // 替换链接
-$update_content = "**Windows QQ_NT {$windows_version_name}.{$version_code} &**\n";
-$update_content .= "**MacOS QQ_NT {$macos_version_name}.{$version_code} &**\n";
-$update_content .= "**Linux QQ_NT {$linux_version_name}.{$version_code}**\n";
+$update_content = "**Windows QQ_NT {$windows_info['version_name']}.{$windows_info['version_code']} &**\n";
+$update_content .= "**MacOS QQ_NT {$macos_info['version_name']}.{$macos_info['version_code']} &**\n";
+$update_content .= "**Linux QQ_NT {$linux_info['version_name']}.{$linux_info['version_code']}**\n";
 $update_content .= "\n**官方更新内容：**\n{$update_log}\n\n";
 $update_content .= "**下载：**\n";
 $update_content .= "- Windows:\n";
-$update_content .= "[X86](https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x86_md5}/QQ{$windows_version_name}.{$version_code}_x86.exe) | [X64](https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x64_md5}/QQ{$windows_version_name}.{$version_code}_x64.exe) | [Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_arm_md5}/QQ{$windows_version_name}.{$version_code}_arm64.exe)\n";
+$update_content .= "[X86](https://dldir1.qq.com/qqfile/qq/QQNT/{$windows_info['md5']}/QQ{$windows_info['version_name']}.{$windows_info['version_code']}_x86.exe) | [X64](https://dldir1.qq.com/qqfile/qq/QQNT/{$windows_info['md5']}/QQ{$windows_info['version_name']}.{$windows_info['version_code']}_x64.exe) | [Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$windows_info['md5']}/QQ{$windows_info['version_name']}.{$windows_info['version_code']}_arm64.exe)\n";
 $update_content .= "- MacOS:\n";
-$update_content .= "[Dmg](https://dldir1.qq.com/qqfile/qq/QQNT/{$macos_md5}/QQ_v{$macos_version_name}.{$version_code}.dmg)\n";
+$update_content .= "[Dmg](https://dldir1.qq.com/qqfile/qq/QQNT/{$macos_info['md5']}/QQ_v{$macos_info['version_name']}.{$macos_info['version_code']}.dmg)\n";
 $update_content .= "- Linux:\n";
-$update_content .= "[DEB_x64](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_amd64.deb) | [RPM_x64](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_x86_64.rpm) | [Appimage_x64](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_x86_64.AppImage)\n";
-$update_content .= "[DEB_Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_arm64.deb) | [RPM_Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_aarch64.rpm) | [Appimage_Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_arm64.AppImage)\n";
-$update_content .= "[LoongArch](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_loongarch64.deb) | [Mips](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_mips64el.deb)\n";
+$update_content .= "[DEB_x64](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_info['md5']}/linuxqq_{$linux_info['version_name']}-{$linux_info['version_code']}_amd64.deb) | [RPM_x64](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_info['md5']}/linuxqq_{$linux_info['version_name']}-{$linux_info['version_code']}_x86_64.rpm) | [Appimage_x64](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_info['md5']}/linuxqq_{$linux_info['version_name']}-{$linux_info['version_code']}_x86_64.AppImage)\n";
+$update_content .= "[DEB_Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_info['md5']}/linuxqq_{$linux_info['version_name']}-{$linux_info['version_code']}_arm64.deb) | [RPM_Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_info['md5']}/linuxqq_{$linux_info['version_name']}-{$linux_info['version_code']}_aarch64.rpm) | [Appimage_Arm](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_info['md5']}/linuxqq_{$linux_info['version_name']}-{$linux_info['version_code']}_arm64.AppImage)\n";
+$update_content .= "[LoongArch](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_info['md5']}/linuxqq_{$linux_info['version_name']}-{$linux_info['version_code']}_loongarch64.deb) | [Mips](https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_info['md5']}/linuxqq_{$linux_info['version_name']}-{$linux_info['version_code']}_mips64el.deb)\n";
+
 // 备份
 if ($backup_link_num !== "") {
     $backup_link_num = intval($backup_link_num) ?: 0;
@@ -43,8 +70,9 @@ $update_content .= "\nTG@ [QQ/TIM For Update Log](https://t.me/qq_updatelog)\n";
 $update_content .= "#QQ_NT_Windows\n";
 $update_content .= "#QQ_NT_MacOS\n";
 $update_content .= "#QQ_NT_Linux";
+
 // 输出到文件
-$file_name = "QQ_Update_Log_{$version_code}.md";
+$file_name = "QQ_Update_Log_{$windows_info['version_code']}.md";
 file_put_contents($file_name, $update_content);
 
 // 文件下载
@@ -53,7 +81,7 @@ header("Content-Type: text/markdown");
 header("Content-Length: " . filesize($file_name));
 readfile($file_name);
 
-// 删除
+// 删除临时文件
 unlink($file_name);
 
 ?>
