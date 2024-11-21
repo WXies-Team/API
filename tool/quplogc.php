@@ -21,23 +21,23 @@ function extract_info($url, $pattern) {
     // 根据平台的不同提取相应的信息
     foreach ($pattern as $platform => $regex) {
         if (preg_match($regex, $url, $matches)) {
-            // Windows x86, x64, arm
+            // 如果是Windows x86, x64, arm
             if (strpos($platform, 'windows') !== false) {
-                $info['md5'] = $matches[1];
-                $info['version_name'] = $matches[2];
-                $info['version_code'] = $matches[3];
+                $info['md5'] = $matches[1]; // MD5值
+                $info['version_name'] = $matches[2]; // 版本名称
+                $info['version_code'] = $matches[3]; // 版本号
             }
-            // macOS
+            // 如果是macOS
             if ($platform == 'macos') {
-                $info['md5'] = $matches[1];
-                $info['version_name'] = $matches[2];
-                $info['version_code'] = $matches[3];
+                $info['md5'] = $matches[1]; // MD5值
+                $info['version_name'] = $matches[2]; // 版本名称
+                $info['version_code'] = $matches[3]; // 版本号
             }
-            // Linux
+            // 如果是Linux
             if ($platform == 'linux') {
-                $info['md5'] = $matches[1];
-                $info['version_name'] = $matches[2];
-                $info['version_code'] = $matches[3];
+                $info['md5'] = $matches[1]; // MD5值
+                $info['version_name'] = $matches[2]; // 版本名称
+                $info['version_code'] = $matches[3]; // 版本号
             }
         }
     }
@@ -45,12 +45,19 @@ function extract_info($url, $pattern) {
     return $info;
 }
 
-// 提取各个平台的信息
+// 提取 Windows, MacOS, 和 Linux 的信息
 $windows_x86_info = extract_info($url, [$pattern['windows_x86']]);
 $windows_x64_info = extract_info($url, [$pattern['windows_x64']]);
 $windows_arm_info = extract_info($url, [$pattern['windows_arm']]);
 $macos_info = extract_info($url, [$pattern['macos']]);
 $linux_info = extract_info($url, [$pattern['linux']]);
+
+// 检查提取到的信息
+if (empty($windows_x86_info['md5']) || empty($windows_x64_info['md5']) || empty($windows_arm_info['md5']) || 
+    empty($macos_info['md5']) || empty($linux_info['md5'])) {
+    echo "Error: MD5 or version information could not be extracted correctly.";
+    exit;
+}
 
 // 替换链接内容
 $update_content = "**Windows QQ_NT {$windows_x86_info['version_name']}.{$windows_x86_info['version_code']} &**\n";
