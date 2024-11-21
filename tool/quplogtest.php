@@ -5,27 +5,32 @@ $url = $_GET["url"];
 $update_log = $_GET["log"];
 $backup_link_num = $_GET["blink"];
 
-// 提取 URL 中的相关信息
+// 正则表达式：提取MD5、版本号等信息
 $pattern = '/https:\/\/dldir1\.qq\.com\/qqfile\/qq\/QQNT\/([a-f0-9]{8})\/QQ(?:([v0-9\.]+))?_?([a-zA-Z0-9\.\-]+)(?:_([a-zA-Z0-9]+))?\.(exe|dmg|rpm|deb|AppImage)/';
 preg_match($pattern, $url, $matches);
 
-// 提取参数
-$md5 = $matches[1];
-$version_name = isset($matches[2]) ? $matches[2] : $matches[3];
-$version_code = isset($matches[3]) ? preg_replace('/\D/', '', $matches[3]) : ''; // 提取数字部分作为版本号
-$platform = isset($matches[4]) ? $matches[4] : '';
+// 提取 MD5 和版本信息
+$md5 = $matches[1]; // MD5值
+$version_name = isset($matches[2]) ? $matches[2] : $matches[3]; // 版本名称（如 9.9.16）
+$platform = isset($matches[4]) ? $matches[4] : ''; // 平台信息（如 x86, x64, arm64 等）
 
-// 设置平台相关变量
-$windows_version_name = $version_name;
-$macos_version_name = $version_name;
-$linux_version_name = $version_name;
+// 提取版本代码（从 version_name 中提取，如 '29804'）
+preg_match('/\d{5,}/', $matches[3], $version_matches);
+$version_code = isset($version_matches[0]) ? $version_matches[0] : '';
+
+// 设置不同平台的 MD5 和版本名
 $winodws_x86_md5 = $md5;
 $winodws_x64_md5 = $md5;
 $winodws_arm_md5 = $md5;
 $macos_md5 = $md5;
 $linux_md5 = $md5;
 
-// 替换链接内容
+// 设置平台相关变量（可以根据不同平台调整）
+$windows_version_name = $version_name;
+$macos_version_name = $version_name;
+$linux_version_name = $version_name;
+
+// 生成更新内容
 $update_content = "**Windows QQ_NT {$windows_version_name}.{$version_code} &**\n";
 $update_content .= "**MacOS QQ_NT {$macos_version_name}.{$version_code} &**\n";
 $update_content .= "**Linux QQ_NT {$linux_version_name}.{$version_code}**\n";
