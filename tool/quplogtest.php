@@ -52,13 +52,6 @@ $windows_arm_info = extract_info($url, [$pattern['windows_arm']]);
 $macos_info = extract_info($url, [$pattern['macos']]);
 $linux_info = extract_info($url, [$pattern['linux']]);
 
-// 检查提取到的信息
-if (empty($windows_x86_info['md5']) || empty($windows_x64_info['md5']) || empty($windows_arm_info['md5']) || 
-    empty($macos_info['md5']) || empty($linux_info['md5'])) {
-    echo "Error: MD5 or version information could not be extracted correctly.";
-    exit;
-}
-
 // 替换链接内容
 $update_content = "**Windows QQ_NT {$windows_x86_info['version_name']}.{$windows_x86_info['version_code']} &**\n";
 $update_content .= "**MacOS QQ_NT {$macos_info['version_name']}.{$macos_info['version_code']} &**\n";
