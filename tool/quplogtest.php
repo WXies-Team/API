@@ -10,26 +10,26 @@ $update_log = $_GET["log"];
 $backup_link_num = $_GET["blink"];
 
 // Windows x86
-preg_match('/QQNT\/([a-z0-9]+)\/QQ(\d+\.\d+\.\d+)\.(\d+)_x86/', $url_windows_x86, $matches_x86);
+preg_match('/QQNT\/([a-z0-9]+)\/QQ(\d+\.\d+\.\d+)\.(\d+)_x86/', $link_windows_x86, $matches_x86);
 $winodws_x86_md5 = $matches_x86[1];
 $windows_version_name = $matches_x86[2];
 $version_code = $matches_x86[3];
 
 // Windows x64
-preg_match('/QQNT\/([a-z0-9]+)\/QQ(\d+\.\d+\.\d+)\.(\d+)_x64/', $url_windows_x64, $matches_x64);
+preg_match('/QQNT\/([a-z0-9]+)\/QQ(\d+\.\d+\.\d+)\.(\d+)_x64/', $link_windows_x64, $matches_x64);
 $winodws_x64_md5 = $matches_x64[1];
 
 // Windows arm
-preg_match('/QQNT\/([a-z0-9]+)\/QQ(\d+\.\d+\.\d+)\.(\d+)_arm64/', $url_windows_arm, $matches_arm);
+preg_match('/QQNT\/([a-z0-9]+)\/QQ(\d+\.\d+\.\d+)\.(\d+)_arm64/', $link_windows_arm, $matches_arm);
 $winodws_arm_md5 = $matches_arm[1];
 
 // MacOS
-preg_match('/QQNT\/([a-z0-9]+)\/QQ_v(\d+\.\d+\.\d+)\.(\d+)/', $url_macos, $matches_macos);
+preg_match('/QQNT\/([a-z0-9]+)\/QQ_v(\d+\.\d+\.\d+)\.(\d+)/', $link_macos, $matches_macos);
 $macos_md5 = $matches_macos[1];
 $macos_version_name = $matches_macos[2];
 
 // Linux
-preg_match('/QQNT\/([a-z0-9]+)\/linuxqq_(\d+\.\d+\.\d+)-(\d+)/', $url_linux, $matches_linux);
+preg_match('/QQNT\/([a-z0-9]+)\/linuxqq_(\d+\.\d+\.\d+)-(\d+)/', $link_linux, $matches_linux);
 $linux_md5 = $matches_linux[1];
 $linux_version_name = $matches_linux[2];
 
