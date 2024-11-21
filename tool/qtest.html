@@ -97,23 +97,23 @@
         <h1>生成QQ更新日志(版本号)</h1>
         <form id="updateForm" action="https://api.wxies.cn/tool/quplogtest.php" method="get" target="_blank">
             <div class="form-row">
-                <label for="link_windows_x86">Windows x86lj</label>
+                <label for="link_windows_x86">Windows X86 链接</label>
                 <input type="text" id="link_windows_x86" name="link_windows_x86">
             </div>
             <div class="form-row">
-                <label for="link_windows_x64">w64</label>
+                <label for="link_windows_x64">Windows X64 链接</label>
                 <input type="text" id="link_windows_x64" name="link_windows_x64">
             </div>
             <div class="form-row">
-                <label for="link_windows_arm">warm</label>
+                <label for="link_windows_arm">Windows arm 链接</label>
                 <input type="text" id="link_windows_arm" name="link_windows_arm">
             </div>
             <div class="form-row">
-                <label for="link_macos">macos</label>
+                <label for="link_macos">macOOS 链接</label>
                 <input type="text" id="link_macos" name="link_macos">
             </div>
             <div class="form-row">
-                <label for="link_linux">linux</label>
+                <label for="link_linux">Linux 链接（任意一个）</label>
                 <input type="text" id="link_linux" name="link_linux">
             </div>
             <div class="form-row full-width">
@@ -125,7 +125,7 @@
                 <input type="text" id="blink" name="blink">
             </div>
             <div class="form-row full-width">
-                <label for="token">Token：</label>
+                <label for="token">Token（无则不推送至 Telegram）：</label>
                 <input type="text" id="token" name="token">
             </div>
             <input type="submit" value="生成更新日志">
