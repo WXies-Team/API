@@ -1,8 +1,7 @@
 <?php
 
 // 获取 URL 参数
-$url_windows_x86 = "https://dldir1.qq.com/qqfile/qq/QQNT/09d7ff8c/QQ9.9.16.29804_x86.exe";
-$ur$link_windows_x86 = $_GET["link_windows_x86"];
+$link_windows_x86 = $_GET["link_windows_x86"];
 $link_windows_x64 = $_GET["link_windows_x64"];
 $link_windows_arm = $_GET["link_windows_arm"];
 $link_macos = $_GET["link_macos"];
