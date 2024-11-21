@@ -35,9 +35,9 @@ function extract_info($url, $pattern) {
 }
 
 // 提取 Windows, MacOS, 和 Linux 的信息
-$windows_info = extract_info($windows_url, $pattern);
-$macos_info = extract_info($macos_url, $pattern);
-$linux_info = extract_info($linux_url, $pattern);
+$windows_info = extract_info($url, $pattern);
+$macos_info = extract_info($url, $pattern);
+$linux_info = extract_info($url, $pattern);
 
 // 替换链接
 $update_content = "**Windows QQ_NT {$windows_info['version_name']}.{$version_code} &**\n";
