@@ -97,40 +97,24 @@
         <h1>生成QQ更新日志(版本号)</h1>
         <form id="updateForm" action="https://api.wxies.cn/tool/quplogc.php" method="get" target="_blank">
             <div class="form-row">
-                <label for="win">Windows 大版本号：</label>
-                <input type="text" id="win" name="win" value="9.9.">
+                <label for="link_windows_x86">Windows X86 链接</label>
+                <input type="text" id="link_windows_x86" name="link_windows_x86">
             </div>
             <div class="form-row">
-                <label for="linux">Linux 大版本号：</label>
-                <input type="text" id="linux" name="linux"value="3.2.">
+                <label for="link_windows_x64">Windows X64 链接</label>
+                <input type="text" id="link_windows_x64" name="link_windows_x64">
             </div>
             <div class="form-row">
-                <label for="macos">macOS 大版本号：</label>
-                <input type="text" id="macos" name="macos"value="6.9.">
+                <label for="link_windows_arm">Windows arm 链接</label>
+                <input type="text" id="link_windows_arm" name="link_windows_arm">
             </div>
             <div class="form-row">
-                <label for="vcode">小版本号：</label>
-                <input type="text" id="vcode" name="vcode">
+                <label for="link_macos">macOS 链接</label>
+                <input type="text" id="link_macos" name="link_macos">
             </div>
             <div class="form-row">
-                <label for="w86">Windows X86 MD5：</label>
-                <input type="text" id="w86" name="w86">
-            </div>
-            <div class="form-row">
-                <label for="w64">Windows X64 MD5：</label>
-                <input type="text" id="w64" name="w64">
-            </div>
-            <div class="form-row">
-                <label for="warm">Windows Arm MD5：</label>
-                <input type="text" id="warm" name="warm">
-            </div>
-            <div class="form-row">
-                <label for="mac">macOS MD5：</label>
-                <input type="text" id="mac" name="mac">
-            </div>
-            <div class="form-row">
-                <label for="linuxc">Linux MD5：</label>
-                <input type="text" id="linuxc" name="linuxc">
+                <label for="link_linux">Linux 链接（任意一个）</label>
+                <input type="text" id="link_linux" name="link_linux">
             </div>
             <div class="form-row full-width">
                 <label for="log">更新日志：</label>
@@ -139,6 +123,10 @@
             <div class="form-row full-width">
                 <label for="blink">备份链接初始数字（不输入删除备份段）：</label>
                 <input type="text" id="blink" name="blink">
+            </div>
+            <div class="form-row full-width">
+                <label for="token">Token（无则不推送至 Telegram）：</label>
+                <input type="text" id="token" name="token">
             </div>
             <input type="submit" value="生成更新日志">
         </form>
