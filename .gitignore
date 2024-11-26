@@ -2,3 +2,4 @@
 .htaccess
 .user.ini
 tool/.env
+/vendor
