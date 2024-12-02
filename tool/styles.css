@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: auto;
     transition: all 0.3s ease;
 }
 
@@ -104,17 +104,6 @@ input[type="submit"]:hover {
 input[type="submit"]:active {
     background-color: #004a8a;
     transform: scale(0.98); /* 按钮点击时的压缩效果 */
-}
-
-/* 简单的加载提示样式 */
-.loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-    color: #0078D4;
-    display: none; /* 默认隐藏 */
 }
 
 /* 页面渐现效果 */
