@@ -1,96 +1,11 @@
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <link rel="icon" href="https://q1.qlogo.cn/g?b=qq&nk=1115058004&s=640">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生成QQ更新日志(版本号)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 900px;
-            width: 90%;
-            box-sizing: border-box;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #0078D4;
-        }
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-        .form-row label {
-            flex: 1 1 40%;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-row input[type="text"] {
-            flex: 1 1 55%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        .form-row.full-width {
-            flex-direction: column;
-        }
-        .form-row.full-width textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            height: 100px;
-            resize: vertical;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #0078D4;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 20px;
-        }
-        input[type="submit"]:hover {
-            background-color: #005bb5;
-        }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 20px;
-            }
-            .form-row {
-                flex-direction: column;
-            }
-            .form-row label, .form-row input[type="text"], .form-row.full-width textarea {
-                width: 100%;
-                flex: 1 1 100%;
-            }
-            input[type="submit"] {
-                font-size: 14px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="quplog.css">
 </head>
 <body>
     <div class="container">
