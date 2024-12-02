@@ -64,7 +64,7 @@ h1 {
 
 .form-row input[type="text"]:focus, .form-row textarea:focus {
     border-color: #0078D4;
-    transform: scale(1.05); /* 聚焦时放大效果 */
+    transform: scale(1.02); /* 聚焦时放大效果 */
 }
 
 .form-row.full-width {
@@ -98,7 +98,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #005bb5;
-    transform: scale(1.05); /* 按钮悬停时的放大效果 */
+    transform: scale(1.02); /* 按钮悬停时的放大效果 */
 }
 
 input[type="submit"]:active {
