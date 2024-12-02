@@ -1,0 +1,148 @@
+/* 通用样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 0;
+    animation: fadeIn 1s forwards; /* 页面加载时的渐现效果 */
+    position: relative; /* 相对定位，用于容纳加载动画 */
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #0078D4;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.2s; /* 标题渐现效果 */
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.4s; /* 表单行的渐现效果 */
+}
+
+.form-row label {
+    flex: 1 1 40%;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    transition: all 0.3s ease; /* 标签聚焦时的过渡 */
+}
+
+.form-row input[type="text"], .form-row textarea {
+    flex: 1 1 55%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-row input[type="text"]:focus, .form-row textarea:focus {
+    border-color: #0078D4;
+    transform: scale(1.05); /* 聚焦时放大效果 */
+}
+
+.form-row.full-width {
+    flex-direction: column;
+}
+
+.form-row.full-width textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 120px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #0078D4;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+input[type="submit"]:hover {
+    background-color: #005bb5;
+    transform: scale(1.05); /* 按钮悬停时的放大效果 */
+}
+
+input[type="submit"]:active {
+    background-color: #004a8a;
+    transform: scale(0.98); /* 按钮点击时的压缩效果 */
+}
+
+/* 简单的加载提示样式 */
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #0078D4;
+    display: none; /* 默认隐藏 */
+}
+
+/* 页面渐现效果 */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 20px;
+    }
+    .form-row {
+        flex-direction: column;
+        margin-bottom: 12px;
+    }
+    .form-row label {
+        width: 100%;
+        margin-bottom: 6px;
+        font-size: 16px;
+    }
+    .form-row input[type="text"], .form-row textarea {
+        width: 100%;
+        font-size: 16px;
+    }
+    input[type="submit"] {
+        font-size: 14px;
+        padding: 14px;
+    }
+}
