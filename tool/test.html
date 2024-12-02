@@ -1,0 +1,149 @@
+<html lang="zh-CN">
+<head>
+    <link rel="icon" href="https://q1.qlogo.cn/g?b=qq&nk=1115058004&s=640">
+    <meta charset="UTF-8">
+    <title>生成QQ更新日志(版本号)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #0078D4;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            justify-content: space-between;
+        }
+        .form-row label {
+            flex: 1 1 40%;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-row input[type="text"], .form-row textarea {
+            flex: 1 1 55%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-row.full-width {
+            flex-direction: column;
+        }
+        .form-row.full-width textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            height: 120px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #0078D4;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #005bb5;
+        }
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+            .form-row label, .form-row input[type="text"], .form-row.full-width textarea {
+                width: 100%;
+                flex: 1 1 100%;
+            }
+            input[type="submit"] {
+                font-size: 14px;
+            }
+            .form-row input[type="text"], .form-row textarea {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>生成QQ更新日志(版本号)</h1>
+        <form id="updateForm" action="https://api.wxies.cn/tool/quplogc.php" method="get" target="_blank">
+            <div class="form-row">
+                <label for="link_windows_x86">Windows X86 链接(不输入则删除此段)</label>
+                <input type="text" id="link_windows_x86" name="link_windows_x86">
+            </div>
+            <div class="form-row">
+                <label for="link_windows_x64">Windows X64 链接</label>
+                <input type="text" id="link_windows_x64" name="link_windows_x64">
+            </div>
+            <div class="form-row">
+                <label for="link_windows_arm">Windows arm 链接</label>
+                <input type="text" id="link_windows_arm" name="link_windows_arm">
+            </div>
+            <div class="form-row">
+                <label for="link_macos">macOS 链接(不输入则删除此段)</label>
+                <input type="text" id="link_macos" name="link_macos">
+            </div>
+            <div class="form-row">
+                <label for="link_linux">Linux 链接（任意一个 不输入则删除此段）</label>
+                <input type="text" id="link_linux" name="link_linux">
+            </div>
+            <div class="form-row full-width">
+                <label for="log">更新日志：</label>
+                <textarea id="log" name="log"></textarea>
+            </div>
+            <div class="form-row full-width">
+                <label for="blink">备份链接初始数字（不输入删除备份段）：</label>
+                <input type="text" id="blink" name="blink">
+            </div>
+            <div class="form-row full-width">
+                <label for="token">Token（无则不推送至 Telegram）：</label>
+                <input type="text" id="token" name="token">
+            </div>
+            <input type="submit" value="生成更新日志">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("updateForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            this.submit();
+        });
+    </script>
+</body>
+</html>
