@@ -1,4 +1,5 @@
-
+composer.lock
+composer.json
 .htaccess
 .user.ini
 tool/.env
