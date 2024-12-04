@@ -1,8 +1,8 @@
 /* 通用样式 */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif; /* 设置字体为苹方 */
+    background-color: #f8f9fa;  /* 轻微灰色背景，避免纯白色刺眼 */
+    color: #333;  /* 深色文本，增加可读性 */
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,26 +11,27 @@ body {
     min-height: 100vh;
     overflow: auto;
     transition: all 0.3s ease;
+    line-height: 1.6;  /* 增加行间距，提高可读性 */
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);  /* 背景透明，增加层次感 */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* 增加阴影效果 */
     max-width: 900px;
     width: 100%;
     box-sizing: border-box;
     opacity: 0;
     animation: fadeIn 1s forwards; /* 页面加载时的渐现效果 */
-    position: relative; /* 相对定位，用于容纳加载动画 */
+    position: relative;
 }
 
 h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 28px;
+    margin-bottom: 30px;
     text-align: center;
-    color: #0078D4;
+    color: #0078D4;  /* 标题使用品牌颜色 */
     opacity: 0;
     animation: fadeIn 1s forwards 0.2s; /* 标题渐现效果 */
 }
@@ -38,7 +39,7 @@ h1 {
 .form-row {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     justify-content: space-between;
     opacity: 0;
     animation: fadeIn 1s forwards 0.4s; /* 表单行的渐现效果 */
@@ -49,57 +50,65 @@ h1 {
     margin-bottom: 8px;
     font-weight: bold;
     color: #555;
-    transition: all 0.3s ease; /* 标签聚焦时的过渡 */
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
 .form-row input[type="text"], .form-row textarea {
     flex: 1 1 55%;
-    padding: 12px;
+    padding: 14px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
+    border-radius: 6px;
+    font-size: 16px;
     box-sizing: border-box;
     transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
 .form-row input[type="text"]:focus, .form-row textarea:focus {
     border-color: #0078D4;
-    transform: scale(1.02); /* 聚焦时放大效果 */
+    box-shadow: 0 0 8px rgba(0, 120, 212, 0.3);  /* 聚焦时添加阴影 */
+    transform: scale(1.02);  /* 聚焦时轻微放大 */
 }
 
 .form-row.full-width {
     flex-direction: column;
 }
 
-.form-row textarea {
-    height: 100px;      /* 设置固定高度为300px */
-    resize: none;       /* 禁止手动调整大小 */
-    overflow-y: auto;   /* 内容超出时出现滚动条 */
+.form-row.full-width textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    height: 300px;  /* 固定高度为300px */
+    resize: none;   /* 禁止调整大小 */
+    overflow-y: auto; /* 超出内容时出现滚动条 */
     box-sizing: border-box;
 }
 
 input[type="submit"] {
     background-color: #0078D4;
     color: #fff;
-    padding: 12px;
+    padding: 14px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
     margin-top: 20px;
     transition: all 0.3s ease;
     position: relative;
+    font-weight: bold;
 }
 
 input[type="submit"]:hover {
     background-color: #005bb5;
-    transform: scale(1.02); /* 按钮悬停时的放大效果 */
+    transform: scale(1.05);  /* 按钮悬停时略微放大 */
 }
 
 input[type="submit"]:active {
     background-color: #004a8a;
-    transform: scale(0.98); /* 按钮点击时的压缩效果 */
+    transform: scale(0.98);  /* 按钮点击时稍微缩小 */
 }
 
 /* 页面渐现效果 */
@@ -111,23 +120,27 @@ input[type="submit"]:active {
 /* 响应式设计 */
 @media (max-width: 768px) {
     h1 {
-        font-size: 20px;
+        font-size: 24px;  /* 小屏幕下标题缩小 */
     }
+
     .form-row {
         flex-direction: column;
-        margin-bottom: 12px;
+        margin-bottom: 15px;
     }
+
     .form-row label {
         width: 100%;
         margin-bottom: 6px;
         font-size: 16px;
     }
+
     .form-row input[type="text"], .form-row textarea {
         width: 100%;
         font-size: 16px;
     }
+
     input[type="submit"] {
-        font-size: 14px;
-        padding: 14px;
+        font-size: 16px;
+        padding: 16px;  /* 按钮在小屏幕上调整大小 */
     }
 }
