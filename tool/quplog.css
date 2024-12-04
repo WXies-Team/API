@@ -71,14 +71,10 @@ h1 {
     flex-direction: column;
 }
 
-.form-row.full-width textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    height: 120px;
-    resize: vertical;
+.form-row textarea {
+    height: 100px;      /* 设置固定高度为300px */
+    resize: none;       /* 禁止手动调整大小 */
+    overflow-y: auto;   /* 内容超出时出现滚动条 */
     box-sizing: border-box;
 }
 
