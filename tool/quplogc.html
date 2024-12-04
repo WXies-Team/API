@@ -12,7 +12,7 @@
         <h1>生成QQ更新日志(版本号)</h1>
         <form id="updateForm" action="https://api.wxies.cn/tool/quplogc.php" method="get" target="_blank">
             <div class="form-row">
-                <label for="link_windows_x86">Windows X86 链接(不输入则删除此段)</label>
+                <label for="link_windows_x86">Windows X86 链接</label>
                 <input type="text" id="link_windows_x86" name="link_windows_x86">
             </div>
             <div class="form-row">
@@ -24,26 +24,26 @@
                 <input type="text" id="link_windows_arm" name="link_windows_arm">
             </div>
             <div class="form-row">
-                <label for="link_macos">macOS 链接(不输入则删除此段)</label>
+                <label for="link_macos">macOS 链接</label>
                 <input type="text" id="link_macos" name="link_macos">
             </div>
             <div class="form-row">
-                <label for="link_linux">Linux 链接（任意一个 不输入则删除此段）</label>
+                <label for="link_linux">任意一个 Linux 链接</label>
                 <input type="text" id="link_linux" name="link_linux">
             </div>
             <div class="form-row">
-                <label for="log">更新日志：</label>
+                <label for="log">更新日志</label>
                 <textarea id="log" name="log"></textarea>
             </div>
             <div class="form-row">
-                <label for="blink">备份链接初始数字（不输入删除备份段）：</label>
+                <label for="blink">备份链接数字</label>
                 <input type="text" id="blink" name="blink">
             </div>
             <div class="form-row">
-                <label for="token">Token（无则不推送至 Telegram）：</label>
+                <label for="token">Token</label>
                 <input type="text" id="token" name="token">
             </div>
-            <input type="submit" value="生成更新日志">
+            <input type="submit" value="生成">
         </form>
     </div>
 

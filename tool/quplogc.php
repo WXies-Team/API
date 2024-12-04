@@ -94,9 +94,15 @@ if ($backup_link_num !== "") {
 }
 
 $update_content .= "\nTG@ <a href='https://t.me/qq_updatelog'>QQ/TIM For Update Log</a>\n";
+if (!empty($windows_version_name)) {
 $update_content .= "#QQ_NT_Windows\n";
+}
+if (!empty($macos_version_name)) {
 $update_content .= "#QQ_NT_MacOS\n";
+}
+if (!empty($linux_version_name)) {
 $update_content .= "#QQ_NT_Linux\n";
+}
 
 $file_name = "QQ_Update_Log_{$version_code}.html";
 file_put_contents($file_name, $update_content);
