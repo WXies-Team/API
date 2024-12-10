@@ -50,14 +50,14 @@ if (!empty($windows_version_name)) {
 
 if (!empty($macos_version_name)) {
     if (!empty($update_content)) {
-        $update_content .= " &\n";
+        $update_content .= " <b>&</b>\n";
     }
     $update_content .= "<b>MacOS QQ_NT {$macos_version_name}.{$macos_version_code}</b>";
 }
 
 if (!empty($linux_version_name)) {
     if (!empty($update_content)) {
-        $update_content .= " &\n";
+        $update_content .= " <b>&</b>\n";
     }
     $update_content .= "<b>Linux QQ_NT {$linux_version_name}.{$linux_version_code}</b>";
 }
