@@ -42,12 +42,6 @@ $linux_md5 = $matches_linux[1];
 $linux_version_name = $matches_linux[2];
 $linux_version_code = $matches_linux[3];
 
-// Function to check if URL is valid (returns 200 OK)
-function is_url_valid($url) {
-    $headers = @get_headers($url);
-    return strpos($headers[0], '200') !== false;
-}
-
 $update_content = "";
 
 if (!empty($windows_version_name)) {
@@ -71,65 +65,58 @@ $update_content .= "\n<b>官方更新内容：</b>\n<blockquote>{$update_log}</b
 $update_content .= "<b>下载：</b>\n";
 
 if (!empty($windows_version_name)) {
-    $update_content .= "- Windows:\n";
-    $update_content .= "<blockquote>";
-    
-    $links = [];
-    
-    if (!empty($winodws_x86_md5) && is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x86_md5}/QQ{$windows_version_name}.{$windows_version_code}_x86.exe")) {
-        $links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x86_md5}/QQ{$windows_version_name}.{$windows_version_code}_x86.exe'>X86</a>";
-    }
-    if (!empty($winodws_x64_md5) && is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x64_md5}/QQ{$windows_version_name}.{$windows_version_code}_x64.exe")) {
-        $links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x64_md5}/QQ{$windows_version_name}.{$windows_version_code}_x64.exe'>X64</a>";
-    }
-    if (!empty($winodws_arm_md5) && is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_arm_md5}/QQ{$windows_version_name}.{$windows_version_code}_arm64.exe")) {
-        $links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_arm_md5}/QQ{$windows_version_name}.{$windows_version_code}_arm64.exe'>Arm</a>";
-    }
-    
-    $update_content .= implode(" | ", $links);
-    $update_content .= "</blockquote>\n";
+$update_content .= "- Windows:\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x86_md5}/QQ{$windows_version_name}.{$version_code}_x86.exe'>X86</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x64_md5}/QQ{$windows_version_name}.{$version_code}_x64.exe'>X64</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_arm_md5}/QQ{$windows_version_name}.{$version_code}_arm64.exe'>Arm</a></blockquote>\n";
 }
 
 if (!empty($macos_version_name)) {
-    $update_content .= "- MacOS:\n";
-    if (is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$macos_md5}/QQ_v{$macos_version_name}.{$macos_version_code}.dmg")) {
-        $update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$macos_md5}/QQ_v{$macos_version_name}.{$macos_version_code}.dmg'>Dmg</a></blockquote>\n";
-    }
+$update_content .= "- MacOS:\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$macos_md5}/QQ_v{$macos_version_name}.{$version_code}.dmg'>Dmg</a></blockquote>\n";
 }
 
 if (!empty($linux_version_name)) {
-    $update_content .= "- Linux:\n";
-    $update_content .= "<blockquote>";
-
-    $linux_links = [];
-    if (is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_amd64.deb")) {
-        $linux_links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_amd64.deb'>DEB_x64</a>";
-    }
-    if (is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_x86_64.rpm")) {
-        $linux_links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_x86_64.rpm'>RPM_x64</a>";
-    }
-    if (is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_x86_64.AppImage")) {
-        $linux_links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_x86_64.AppImage'>Appimage_x64</a>";
-    }
-    $update_content .= implode(" | ", $linux_links);
-
-    $update_content .= "</blockquote>\n<blockquote>";
-
-    $linux_links = [];
-    if (is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_arm64.deb")) {
-        $linux_links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_arm64.deb'>DEB_Arm</a>";
-    }
-    if (is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_aarch64.rpm")) {
-        $linux_links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_aarch64.rpm'>RPM_Arm</a>";
-    }
-    if (is_url_valid("https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_arm64.AppImage")) {
-        $linux_links[] = "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_arm64.AppImage'>Appimage_Arm</a>";
-    }
-    $update_content .= implode(" | ", $linux_links);
-    $update_content .= "</blockquote>\n";
+$update_content .= "- Linux:\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_amd64.deb'>DEB_x64</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_x86_64.rpm'>RPM_x64</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_x86_64.AppImage'>Appimage_x64</a></blockquote>\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_arm64.deb'>DEB_Arm</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_aarch64.rpm'>RPM_Arm</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_arm64.AppImage'>Appimage_Arm</a></blockquote>\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_loongarch64.deb'>LoongArch</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_mips64el.deb'>Mips</a></blockquote>\n";
 }
 
-$file_name = "QQ_Update_Log.html";
+if ($backup_link_num !== "") {
+    $backup_link_num = intval($backup_link_num) ?: 0;
+    $update_content .= "\n<b>备份：</b>\n";
+    $update_content .= "- Windows:\n";
+    $update_content .= "<blockquote><a href='https://t.me/linqiqi_backup/{$backup_link_num}'>X86</a> | ";
+    $update_content .= "<a href='https://t.me/linqiqi_backup/" . ++$backup_link_num . "'>X64</a> | ";
+    $update_content .= "<a href='https://t.me/linqiqi_backup/" . ++$backup_link_num . "'>Arm</a></blockquote>\n";
+    $update_content .= "- MacOS:\n";
+    $update_content .= "<blockquote><a href='https://t.me/linqiqi_backup/" . ++$backup_link_num . "'>Dmg</a></blockquote>\n";
+    $update_content .= "- Linux:\n";
+    $update_content .= "<blockquote><a href='https://t.me/linqiqi_backup/" . ++$backup_link_num . "'>DEB</a> | ";
+    $update_content .= "<a href='https://t.me/linqiqi_backup/" . ++$backup_link_num . "'>RPM</a> | ";
+    $update_content .= "<a href='https://t.me/linqiqi_backup/" . ++$backup_link_num . "'>Appimage</a> | ";
+    $update_content .= "<a href='https://t.me/linqiqi_backup/" . ++$backup_link_num . "'>LoongArch</a> | ";
+    $update_content .= "<a href='https://t.me/linqiqi_backup/" . ++$backup_link_num . "'>Mips</a></blockquote>\n";
+}
+
+$update_content .= "\nTG@ <a href='https://t.me/qq_updatelog'>QQ/TIM For Update Log</a>\n";
+if (!empty($windows_version_name)) {
+$update_content .= "#QQ_NT_Windows\n";
+}
+if (!empty($macos_version_name)) {
+$update_content .= "#QQ_NT_MacOS\n";
+}
+if (!empty($linux_version_name)) {
+$update_content .= "#QQ_NT_Linux\n";
+}
+
+$file_name = "QQ_Update_Log_{$version_code}.html";
 file_put_contents($file_name, $update_content);
 
 header("Content-Disposition: attachment; filename=\"$file_name\"");
