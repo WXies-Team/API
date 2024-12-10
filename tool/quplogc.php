@@ -42,17 +42,25 @@ $linux_md5 = $matches_linux[1];
 $linux_version_name = $matches_linux[2];
 $linux_version_code = $matches_linux[3];
 
+$update_content = "";
+
 if (!empty($windows_version_name)) {
-$update_content = "<b>Windows QQ_NT {$windows_version_name}.{$windows_version_code} &</b>\n";
+    $update_content .= "<b>Windows QQ_NT {$windows_version_name}.{$windows_version_code}</b>";
 }
+
 if (!empty($macos_version_name)) {
-$update_content .= "<b>MacOS QQ_NT {$macos_version_name}.{$macos_version_code} &</b>\n";
+    if (!empty($update_content)) {
+        $update_content .= " &\n";
+    }
+    $update_content .= "<b>MacOS QQ_NT {$macos_version_name}.{$macos_version_code}</b>";
 }
+
 if (!empty($linux_version_name)) {
-$update_content .= "<b>Linux QQ_NT {$linux_version_name}.{$linux_version_code}</b>\n";
+    if (!empty($update_content)) {
+        $update_content .= " &\n";
+    }
+    $update_content .= "<b>Linux QQ_NT {$linux_version_name}.{$linux_version_code}</b>";
 }
-$update_content .= "\n<b>官方更新内容：</b>\n<blockquote>{$update_log}</blockquote>\n\n";
-$update_content .= "<b>下载：</b>\n";
 
 if (!empty($windows_version_name)) {
 $update_content .= "- Windows:\n";
