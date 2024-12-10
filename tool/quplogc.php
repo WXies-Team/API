@@ -24,7 +24,7 @@ $Access_Token = $_ENV['ACCESS_TOKEN'];
 preg_match('/QQNT\/([a-z0-9]+)\/QQ(\d+\.\d+\.\d+)\.(\d+)_x86/', $link_windows_x86, $matches_x86);
 $winodws_x86_md5 = $matches_x86[1];
 $windows_version_name = $matches_x86[2];
-$version_code = $matches_x86[3];
+$windows_version_code = $matches_x86[3];
 
 preg_match('/QQNT\/([a-z0-9]+)\/QQ(\d+\.\d+\.\d+)\.(\d+)_x64/', $link_windows_x64, $matches_x64);
 $winodws_x64_md5 = $matches_x64[1];
@@ -35,19 +35,21 @@ $winodws_arm_md5 = $matches_arm[1];
 preg_match('/QQNT\/([a-z0-9]+)\/QQ_v(\d+\.\d+\.\d+)\.(\d+)/', $link_macos, $matches_macos);
 $macos_md5 = $matches_macos[1];
 $macos_version_name = $matches_macos[2];
+$macos_version_code = $matches_macos[3]; 
 
 preg_match('/QQNT\/([a-z0-9]+)\/linuxqq_(\d+\.\d+\.\d+)-(\d+)/', $link_linux, $matches_linux);
 $linux_md5 = $matches_linux[1];
 $linux_version_name = $matches_linux[2];
+$linux_version_code = $matches_linux[3];
 
 if (!empty($windows_version_name)) {
-$update_content = "<b>Windows QQ_NT {$windows_version_name}.{$version_code} &</b>\n";
+$update_content = "<b>Windows QQ_NT {$windows_version_name}.{$windows_version_code}</b>";
 }
 if (!empty($macos_version_name)) {
-$update_content .= "<b>MacOS QQ_NT {$macos_version_name}.{$version_code} &</b>\n";
+$update_content .= "<b> &\nMacOS QQ_NT {$macos_version_name}.{$macos_version_code}</b>";
 }
 if (!empty($linux_version_name)) {
-$update_content .= "<b>Linux QQ_NT {$linux_version_name}.{$version_code}</b>\n";
+$update_content .= "<b>&\nLinux QQ_NT {$linux_version_name}.{$linux_version_code}</b>";
 }
 $update_content .= "\n<b>官方更新内容：</b>\n<blockquote>{$update_log}</blockquote>\n\n";
 $update_content .= "<b>下载：</b>\n";
