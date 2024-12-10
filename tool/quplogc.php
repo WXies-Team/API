@@ -61,6 +61,8 @@ if (!empty($linux_version_name)) {
     }
     $update_content .= "<b>Linux QQ_NT {$linux_version_name}.{$linux_version_code}</b>";
 }
+$update_content .= "\n<b>官方更新内容：</b>\n<blockquote>{$update_log}</blockquote>\n\n";
+$update_content .= "<b>下载：</b>\n";
 
 if (!empty($windows_version_name)) {
 $update_content .= "- Windows:\n";
