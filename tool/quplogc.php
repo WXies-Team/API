@@ -116,7 +116,8 @@ if (!empty($linux_version_name)) {
 $update_content .= "#QQ_NT_Linux\n";
 }
 
-$file_name = "QQ_Update_Log_{$version_code}.html";
+$timestamp = time();
+$file_name = "QQ_Update_Log_" . $timestamp . ".html";
 file_put_contents($file_name, $update_content);
 
 header("Content-Disposition: attachment; filename=\"$file_name\"");
