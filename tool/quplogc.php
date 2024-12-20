@@ -66,26 +66,26 @@ $update_content .= "<b>下载：</b>\n";
 
 if (!empty($windows_version_name)) {
 $update_content .= "- Windows:\n";
-$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x86_md5}/QQ{$windows_version_name}.{$version_code}_x86.exe'>X86</a> | ";
-$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x64_md5}/QQ{$windows_version_name}.{$version_code}_x64.exe'>X64</a> | ";
-$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_arm_md5}/QQ{$windows_version_name}.{$version_code}_arm64.exe'>Arm</a></blockquote>\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x86_md5}/QQ{$windows_version_name}.{$windows_version_code}_x86.exe'>X86</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_x64_md5}/QQ{$windows_version_name}.{$windows_version_code}_x64.exe'>X64</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$winodws_arm_md5}/QQ{$windows_version_name}.{$windows_version_code}_arm64.exe'>Arm</a></blockquote>\n";
 }
 
 if (!empty($macos_version_name)) {
 $update_content .= "- MacOS:\n";
-$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$macos_md5}/QQ_v{$macos_version_name}.{$version_code}.dmg'>Dmg</a></blockquote>\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$macos_md5}/QQ_v{$macos_version_name}.{$macos_version_code}.dmg'>Dmg</a></blockquote>\n";
 }
 
 if (!empty($linux_version_name)) {
 $update_content .= "- Linux:\n";
-$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_amd64.deb'>DEB_x64</a> | ";
-$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_x86_64.rpm'>RPM_x64</a> | ";
-$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_x86_64.AppImage'>Appimage_x64</a></blockquote>\n";
-$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_arm64.deb'>DEB_Arm</a> | ";
-$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_aarch64.rpm'>RPM_Arm</a> | ";
-$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_arm64.AppImage'>Appimage_Arm</a></blockquote>\n";
-$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_loongarch64.deb'>LoongArch</a> | ";
-$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$version_code}_mips64el.deb'>Mips</a></blockquote>\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_amd64.deb'>DEB_x64</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_x86_64.rpm'>RPM_x64</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_x86_64.AppImage'>Appimage_x64</a></blockquote>\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_arm64.deb'>DEB_Arm</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_aarch64.rpm'>RPM_Arm</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_arm64.AppImage'>Appimage_Arm</a></blockquote>\n";
+$update_content .= "<blockquote><a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_loongarch64.deb'>LoongArch</a> | ";
+$update_content .= "<a href='https://dldir1.qq.com/qqfile/qq/QQNT/{$linux_md5}/linuxqq_{$linux_version_name}-{$linux_version_code}_mips64el.deb'>Mips</a></blockquote>\n";
 }
 
 if ($backup_link_num !== "") {
