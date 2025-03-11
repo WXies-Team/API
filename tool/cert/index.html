@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="icon" href="https://api.wxies.cn/avatar/qq.php?qq=1115058004">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焦迈奇游泳回家演唱会电子奖状生成</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #007bff;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        .checkbox-container {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-container label {
+            margin-left: 10px;
+            font-size: 16px;
+        }
+
+        input[type="checkbox"] {
+            margin-left: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            input[type="text"],
+            input[type="button"],
+            input[type="submit"] {
+                font-size: 14px;
+            }
+
+            label {
+                font-size: 16px;
+            }
+
+            .checkbox-container label {
+                font-size: 14px;
+            }
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .question {
+            display: block;
+        }
+
+        .question.hidden {
+            display: none;
+        }
+    </style>
+    <script src="jszip.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>焦迈奇游泳回家演唱会电子奖状生成</h1>
+        <div id="question" class="question">
+            <label for="answer">焦迈奇游泳回家演唱会一共有几站？</label>
+            <input type="text" id="answer" name="answer" placeholder="请输入阿拉伯数字">
+            <input type="button" value="提交" onclick="checkAnswer()">
+        </div>
+
+        <div id="content" class="content">
+            <form id="updateForm">
+                <label for="name">名称</label>
+                <input type="text" id="name" name="name" placeholder="请输入名称">
+                <label>城市</label><br>
+                <div class="checkbox-container">
+                    <label for="wuhan">武汉</label>
+                    <input type="checkbox" id="wuhan" name="city" value="武汉">
+                    <label for="shenzhen">深圳</label>
+                    <input type="checkbox" id="shenzhen" name="city" value="深圳">
+                    <label for="nanjing">南京</label>
+                    <input type="checkbox" id="nanjing" name="city" value="南京">
+                    <label for="changsha">长沙</label>
+                    <input type="checkbox" id="changsha" name="city" value="长沙">
+                    <label for="chengdu">成都</label>
+                    <input type="checkbox" id="chengdu" name="city" value="成都">
+                    <label for="beijing">北京</label>
+                    <input type="checkbox" id="beijing" name="city" value="北京">
+                    <label for="shanghai">上海</label>
+                    <input type="checkbox" id="shanghai" name="city" value="上海">
+                    <label for="hangzhou">杭州</label>
+                    <input type="checkbox" id="hangzhou" name="city" value="杭州">
+                    <label for="suzhou">苏州</label>
+                    <input type="checkbox" id="suzhou" name="city" value="苏州">
+                    <label for="tianjin">天津</label>
+                    <input type="checkbox" id="tianjin" name="city" value="天津">
+                </div>
+                <br>
+                <input type="submit" value="生成">
+            </form>
+
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            const answer = document.getElementById("answer").value;
+
+            if (answer === "10") {
+                document.getElementById("question").classList.add("hidden");
+                document.getElementById("content").style.display = "block";
+                document.querySelector("h1").textContent = "焦迈奇游泳回家演唱会电子奖状生成";
+            } else {
+                alert("答案错误，请输入正确的答案！");
+            }
+        }
+
+        document.getElementById("updateForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const selectedCities = Array.from(document.querySelectorAll('input[name="city"]:checked')).map(checkbox => checkbox.value);
+
+            if (name && selectedCities.length > 0) {
+                const citiesList = selectedCities.join("、");
+                const message = `${name} 同学，你在焦迈奇“游泳回家”巡回演唱会的十场演唱会中去过${citiesList}的演唱会现场，现在为你颁发毕业证书。游泳健将，游泳回家，毕业快乐！`;
+
+                if (selectedCities.length === 1) {
+                    const city = selectedCities[0];
+                    const url = `https://api.wxies.cn/tool/cert/cert.php?name=${encodeURIComponent(name)}&city=${encodeURIComponent(city)}`;
+                    fetch(url)
+                        .then(response => response.blob())
+                        .then(blob => {
+                            const downloadUrl = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = downloadUrl;
+                            a.download = `${name}_${city}.png`;
+                            a.style.display = 'none';
+                            document.body.appendChild(a);
+                            a.click();
+                            URL.revokeObjectURL(downloadUrl);
+                            document.body.removeChild(a);
+                        })
+                        .catch(error => {
+                            console.error('下载失败:', error);
+                        });
+                } else {
+                    const zip = new JSZip();
+                    const filePromises = selectedCities.map(city => {
+                        const url = `https://api.wxies.cn/tool/cert/cert.php?name=${encodeURIComponent(name)}&city=${encodeURIComponent(city)}`;
+                        return fetch(url)
+                            .then(response => response.blob())
+                            .then(blob => zip.file(`${name}_${city}.png`, blob))
+                            .catch(error => console.error('下载失败:', error));
+                    });
+
+                    Promise.all(filePromises)
+                        .then(() => {
+                            zip.generateAsync({ type: "blob" })
+                                .then(function (content) {
+                                    const a = document.createElement('a');
+                                    const downloadUrl = URL.createObjectURL(content);
+                                    a.href = downloadUrl;
+                                    a.download = `${name}_电子奖状.zip`;
+                                    a.style.display = 'none';
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    URL.revokeObjectURL(downloadUrl);
+                                    document.body.removeChild(a);
+                                })
+                                .catch(function (error) {
+                                    console.error('打包失败:', error);
+                                });
+                        })
+                        .catch(error => {
+                            console.error('文件下载错误:', error);
+                        });
+                }
+
+                alert(message);
+            } else {
+                alert("请填写名称并选择城市！");
+            }
+        });
+    </script>
+</body>
+
+</html>
