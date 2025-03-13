@@ -71,7 +71,7 @@
     <div class="error-message">
       <p>WXies API</p>
       <p>将在 <span id="countdown">5</span> 秒后自动跳转到API文档</p>
-      <p>如果没有自动跳转，请点击<a href="https://doc.wxies.cn" class="home-link">这里</a>。</p>
+      <p>如果没有自动跳转，请点击<a href="https://doc.horatio.cn" class="home-link">这里</a>。</p>
     </div>
   </div>
 
@@ -85,7 +85,7 @@
       countdown--;
 
       if (countdown < 0) {
-        window.location.href = 'https://doc.wxies.cn';
+        window.location.href = 'https://doc.horatio.cn';
       } else {
         setTimeout(updateCountdown, 1000);
       }
