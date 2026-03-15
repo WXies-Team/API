@@ -13,6 +13,6 @@ if (!empty($qqg) && is_numeric($qqg) && strlen($qqg) >= 5 && strlen($qqg) <= 10)
     exit();
 } else {
     http_response_code(400);
-    echo "请在 url 后加入有效的 QQ 群号，例如：?qqg=746950948";
+    echo "请在 url 后加入有效的 QQ 群号";
 }
 ?>
