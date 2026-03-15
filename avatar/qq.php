@@ -13,6 +13,6 @@ if (!empty($qq) && is_numeric($qq) && strlen($qq) >= 5 && strlen($qq) <= 10) {
     exit();
 } else {
     http_response_code(400);
-    echo "请在 url 后加入有效的 QQ 号，例如：?qq=1115058004";
+    echo "请在 url 后加入有效的 QQ 号";
 }
 ?>
