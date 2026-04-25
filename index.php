@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cn">
+<html lang="zh-CN">
 
 <!-- Head -->
 <head>
@@ -10,59 +10,44 @@
     <meta name="keywords" content="唯蟹Team, Xies' Group, Blog233, HoratioWeb, lujing, jack">
     <!-- favicon -->
     <link rel="shortcut icon" href="//wxies.cn/images/favicons/favicon.png">
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #fff;
+      }
+
+      .error-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        text-align: center;
+      }
+
+      .error-logo {
+        max-width: 200px;
+        margin-bottom: 20px;
+      }
+
+      .error-message {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .home-link {
+        color: #007bff;
+        text-decoration: none;
+      }
+    </style>
 </head>
-
-<style>
-  /* Set the page height to 100vh (viewport height) */
-  body,
-  html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Set background color to white */
-  body {
-    background-color: #fff;
-  }
-
-  /* Center the content on the page */
-  .error-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    text-align: center;
-  }
-
-  .error-logo {
-    max-width: 200px;
-    margin-bottom: 20px;
-  }
-
-  .error-message {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .home-link {
-    color: #007bff;
-    text-decoration: none;
-  }
-
-  /* Footer styling */
-  footer {
-    background-color: #f0f0f0;
-    /* Light gray background color */
-    padding: 10px 0;
-    text-align: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-</style>
 
 <body>
   <!-- Logo -->
@@ -76,12 +61,11 @@
   </div>
 
   <script>
-    // JavaScript倒计时
-    var countdown = 5;
-    var countdownElement = document.getElementById('countdown');
+    const countdownElement = document.getElementById('countdown');
+    let countdown = 5;
 
     function updateCountdown() {
-      countdownElement.innerHTML = countdown;
+      countdownElement.textContent = countdown;
       countdown--;
 
       if (countdown < 0) {
@@ -91,10 +75,7 @@
       }
     }
 
-    // 页面加载后启动倒计时
-    document.addEventListener('DOMContentLoaded', function () {
-      updateCountdown();
-    });
+    document.addEventListener('DOMContentLoaded', updateCountdown);
   </script>
 </body>
 
