@@ -9,7 +9,7 @@
     <meta name="description" content="We Quest On and On">
     <meta name="keywords" content="唯蟹Team, Xies' Group, Blog233, HoratioWeb, lujing, jack">
     <!-- favicon -->
-    <link rel="shortcut icon" href="//www.wxies.cn/favicon.png">
+    <link rel="shortcut icon" href="//wxies.cn/favicon.ico">
     <style>
       body,
       html {
@@ -52,7 +52,7 @@
 <body>
   <!-- Logo -->
   <div class="error-container">
-    <img class="error-logo" src="https://www.wxies.cn/images/favicons/favicon.png" alt="Logo">
+    <img class="error-logo" src="//wxies.cn/favicon.png" alt="Logo">
     <div class="error-message">
       <p>WXies API</p>
       <p>将在 <span id="countdown">5</span> 秒后自动跳转到API文档</p>
