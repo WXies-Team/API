@@ -6,9 +6,16 @@ error_reporting(E_ALL);
 // 获取并验证 QQ 号
 $qq = $_GET['qq'] ?? '';
 
+// 获取尺寸参数（默认为640）
+$s = $_GET['s'] ?? '640';
+
 // 验证 QQ 号是否为有效数字（5-10 位）
 if (!empty($qq) && is_numeric($qq) && strlen($qq) >= 5 && strlen($qq) <= 10) {
-    $link = "https://q1.qlogo.cn/g?b=qq&nk={$qq}&s=640";
+    // 验证尺寸参数
+    $valid_sizes = ['1' => 40, '2' => 100, '3' => 640];
+    $size = $valid_sizes[$s] ?? 640;
+    
+    $link = "https://q1.qlogo.cn/g?b=qq&nk={$qq}&s={$size}";
     header("Location: $link"); // 302 跳转
     exit();
 } else {

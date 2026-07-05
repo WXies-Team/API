@@ -13,7 +13,12 @@ if ($rand === 'true') {
     if (empty($gettimebase)) {
         $gettime = 0;
     } else {
-        $gettime = $gettimebase;
+        // 验证日期参数是否为有效数字
+        if (is_numeric($gettimebase) && $gettimebase >= -1 && $gettimebase <= 7) {
+            $gettime = intval($gettimebase);
+        } else {
+            $gettime = 0;
+        }
     }
 }
 
@@ -41,7 +46,12 @@ $imgsizebase = $_GET['size'] ?? '';
 if (empty($imgsizebase)) {
     $imgsize = "1920x1080";
 } else {
-    $imgsize = $imgsizebase;
+    // 验证尺寸格式
+    if (preg_match('/^\d{3,4}x\d{3,4}$/', $imgsizebase)) {
+        $imgsize = $imgsizebase;
+    } else {
+        $imgsize = "1920x1080";
+    }
 }
 
 // 建立完整 url
@@ -66,3 +76,4 @@ if ($info === 'true') {
     // 若不是则跳转 url
     header("Location: $imgurl");
 }
+?>
