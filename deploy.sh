@@ -7,6 +7,9 @@ export HOME="${HOME:-/root}"
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "${PROJECT_DIR}"
 
+# 处理 Git 安全目录检查（Git 2.35.2+）
+git config --global --add safe.directory "${PROJECT_DIR}"
+
 REMOTE_BRANCH="origin/main"
 LOCK_FILE="/tmp/deploy-$(basename "${PROJECT_DIR}").lock"
 SCRIPT_HASH=$(md5sum "$0" | awk '{print $1}')
