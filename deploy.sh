@@ -12,7 +12,9 @@ git config --global --add safe.directory "${PROJECT_DIR}"
 
 REMOTE_BRANCH="origin/main"
 LOCK_FILE="/tmp/deploy-$(basename "${PROJECT_DIR}").lock"
-SCRIPT_HASH=$(md5sum "$0" | awk '{print $1}')
+SCRIPT_PATH="${PROJECT_DIR}/$(basename "$0")"
+SCRIPT_HASH=$(md5sum "${SCRIPT_PATH}" | awk '{print $1}')
+FORCE_DEPLOY="${FORCE_DEPLOY:-0}"
 
 # 防止重复运行
 cleanup() { rm -f "${LOCK_FILE}"; }
@@ -52,24 +54,32 @@ deploy() {
     local local_rev remote_rev
     local_rev=$(git rev-parse HEAD)
     remote_rev=$(git rev-parse "${REMOTE_BRANCH}")
-    
-    if [[ "${local_rev}" == "${remote_rev}" ]]; then
+
+    # 脚本更新重启后，强制执行一次部署
+    if [[ "${FORCE_DEPLOY}" == "1" ]]; then
+        echo ">>> 脚本已重启，强制执行部署流程..."
+        export FORCE_DEPLOY=0
+    elif [[ "${local_rev}" == "${remote_rev}" ]]; then
         echo ">>> 无新提交，跳过部署"
         return 0
     fi
-    
+
     echo ">>> 发现新提交，同步代码..."
     git reset --hard "${REMOTE_BRANCH}"
-    
-    # 检查脚本自身是否更新，若有则重启
+
+    # 确保脚本有可执行权限
+    chmod +x "${SCRIPT_PATH}"
+
+    # 检查脚本自身是否更新，若有则重启并强制重新部署
     local new_hash
-    new_hash=$(md5sum "$0" | awk '{print $1}')
+    new_hash=$(md5sum "${SCRIPT_PATH}" | awk '{print $1}')
     if [[ "${new_hash}" != "${SCRIPT_HASH}" ]]; then
-        echo ">>> 脚本已更新，重启中..."
+        echo ">>> 脚本已更新，重启中（将强制重新部署）..."
         rm -f "${LOCK_FILE}"
-        exec "$0"
+        export FORCE_DEPLOY=1
+        exec "${SCRIPT_PATH}"
     fi
-    
+
     echo ">>> 部署完成 $(date '+%Y-%m-%d %H:%M:%S')"
 }
 
