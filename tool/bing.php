@@ -1,79 +1,97 @@
 <?php
-// 关闭错误显示（生产环境必须）
-ini_set('display_errors', 0);
-error_reporting(E_ALL);
+declare(strict_types=1);
 
-// 判断是否随机调用
-$rand = $_GET['rand'] ?? 'false';
-if ($rand === 'true') {
-    $gettime = rand(-1, 7);
+require_once __DIR__ . '/../common.php';
+
+// 1. 解析日期参数（支持随机调用与指定天数）
+$is_rand = get_bool_param('rand', false);
+if ($is_rand) {
+    $day = rand(-1, 7);
 } else {
-    // 若不为随机调用则判断是否指定日期
-    $gettimebase = $_GET['day'] ?? '';
-    if (empty($gettimebase)) {
-        $gettime = 0;
+    $day_param = get_param('day', '0');
+    if (is_numeric($day_param) && (int)$day_param >= -1 && (int)$day_param <= 7) {
+        $day = (int)$day_param;
     } else {
-        // 验证日期参数是否为有效数字
-        if (is_numeric($gettimebase) && $gettimebase >= -1 && $gettimebase <= 7) {
-            $gettime = intval($gettimebase);
-        } else {
-            $gettime = 0;
-        }
+        $day = 0;
     }
 }
 
-// 获取 Bing Json 信息
-$json_string = file_get_contents('https://www.bing.com/HPImageArchive.aspx?format=js&idx=' . $gettime . '&n=1');
-if ($json_string === false) {
-    http_response_code(502);
-    echo "无法获取必应数据";
-    exit();
-}
+// 2. 解析图片尺寸（支持 4K/UHD 超清及常见分辨率白名单）
+$size_input = strtoupper((string) get_param('size', '1920x1080'));
+$supported_sizes = [
+    'UHD'       => 'UHD',
+    '4K'        => 'UHD',
+    '1920X1080' => '1920x1080',
+    '1366X768'  => '1366x768',
+    '1080X1920' => '1080x1920',
+    '1920X1200' => '1920x1200',
+    '1280X768'  => '1280x768',
+    '1024X768'  => '1024x768',
+    '800X600'   => '800x600',
+    '720X1280'  => '720x1280',
+    '480X800'   => '480x800',
+];
 
-// 转换为 PHP 数组
-$data = json_decode($json_string);
-if ($data === null || empty($data->images[0])) {
-    http_response_code(502);
-    echo "必应数据格式错误";
-    exit();
-}
-
-// 提取基础 url
-$imgurlbase = "https://www.bing.com" . $data->images[0]->urlbase;
-
-// 判断是否指定图片大小
-$imgsizebase = $_GET['size'] ?? '';
-if (empty($imgsizebase)) {
-    $imgsize = "1920x1080";
+if (isset($supported_sizes[$size_input])) {
+    $imgsize = $supported_sizes[$size_input];
+} elseif (preg_match('/^\d{3,4}x\d{3,4}$/i', $size_input)) {
+    $imgsize = strtolower($size_input);
 } else {
-    // 验证尺寸格式
-    if (preg_match('/^\d{3,4}x\d{3,4}$/', $imgsizebase)) {
-        $imgsize = $imgsizebase;
-    } else {
-        $imgsize = "1920x1080";
-    }
+    $imgsize = '1920x1080';
 }
 
-// 建立完整 url
-$imgurl = $imgurlbase . "_" . $imgsize . ".jpg";
+// 3. 读取本地轻量缓存（避免高频请求微软接口导致限流与响应延迟）
+$cache_key = 'bing_wallpaper_idx_' . $day;
+$cache_data = cache_get($cache_key);
 
-// 获取其他信息
-$imgtime = $data->images[0]->startdate;
-$imgtitle = $data->images[0]->copyright;
-$imglink = $data->images[0]->copyrightlink;
+if (!is_array($cache_data) || empty($cache_data['urlbase'])) {
+    // 携带 uhd=1 参数请求 Bing 官方接口，附带 3 秒超时保护
+    $bing_api = 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=' . $day . '&n=1&uhd=1';
+    $json = http_get_json($bing_api, 3);
 
-// 判断是否只获取图片信息
-$info = $_GET['info'] ?? 'false';
-if ($info === 'true') {
+    if ($json === null || empty($json['images'][0]['urlbase'])) {
+        api_error(502, '无法获取必应壁纸数据，请稍后重试', 502);
+    }
+
+    $image = $json['images'][0];
+    $cache_data = [
+        'urlbase'       => (string) $image['urlbase'],
+        'startdate'     => (string) ($image['startdate'] ?? ''),
+        'copyright'     => (string) ($image['copyright'] ?? ''),
+        'copyrightlink' => (string) ($image['copyrightlink'] ?? ''),
+    ];
+
+    // 缓存 2 小时 (7200秒)
+    cache_set($cache_key, $cache_data, 7200);
+}
+
+// 4. 构建完整图片链接
+$imgurlbase = 'https://www.bing.com' . $cache_data['urlbase'];
+$imgurl = $imgurlbase . '_' . $imgsize . '.jpg';
+
+// 5. 响应处理（JSON 元数据 vs 302 图片直链跳转）
+$is_info = get_bool_param('info', false);
+if ($is_info) {
+    // 兼顾原有顶层字段与现代化标准规范
+    $payload = [
+        'code'    => 200,
+        'message' => 'success',
+        'title'   => $cache_data['copyright'],
+        'url'     => $imgurl,
+        'link'    => $cache_data['copyrightlink'],
+        'time'    => $cache_data['startdate'],
+        'data'    => [
+            'title' => $cache_data['copyright'],
+            'url'   => $imgurl,
+            'link'  => $cache_data['copyrightlink'],
+            'time'  => $cache_data['startdate'],
+        ],
+    ];
+
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode([
-        "title" => $imgtitle,
-        "url" => $imgurl,
-        "link" => $imglink,
-        "time" => $imgtime
-    ], JSON_UNESCAPED_UNICODE);
+    echo json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    exit;
 } else {
-    // 若不是则跳转 url
-    header("Location: $imgurl");
+    // 携带 2 小时浏览器与 CDN 缓存头跳转
+    api_redirect($imgurl, 7200);
 }
-?>

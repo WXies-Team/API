@@ -4,3 +4,4 @@ composer.json
 .user.ini
 tool/.env
 /vendor
+.cache/

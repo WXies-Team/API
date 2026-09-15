@@ -1,25 +1,28 @@
 <?php
-// 关闭错误显示（生产环境必须）
-ini_set('display_errors', 0);
-error_reporting(E_ALL);
+declare(strict_types=1);
 
-// 获取并验证 QQ 号
-$qq = $_GET['qq'] ?? '';
+require_once __DIR__ . '/../common.php';
 
-// 获取尺寸参数（默认为640）
-$s = $_GET['s'] ?? '640';
+// 获取参数
+$qq = get_param('qq', '');
+$s  = (string) get_param('s', '640');
 
-// 验证 QQ 号是否为有效数字（5-10 位）
-if (!empty($qq) && is_numeric($qq) && strlen($qq) >= 5 && strlen($qq) <= 10) {
-    // 验证尺寸参数
-    $valid_sizes = ['1' => 40, '2' => 100, '3' => 640];
-    $size = $valid_sizes[$s] ?? 640;
-    
-    $link = "https://q1.qlogo.cn/g?b=qq&nk={$qq}&s={$size}";
-    header("Location: $link"); // 302 跳转
-    exit();
-} else {
-    http_response_code(400);
-    echo "请在 url 后加入有效的 QQ 号";
+// 验证 QQ 号（5-12 位正整数）
+if (!preg_match('/^[1-9]\d{4,11}$/', (string)$qq)) {
+    api_error(400, '请在 URL 中提供有效的 QQ 号 (5-12位数字)');
 }
+
+// 尺寸映射：兼容代号 1/2/3 以及像素值 40/100/640
+$size_map = [
+    '1'   => 40,
+    '40'  => 40,
+    '2'   => 100,
+    '100' => 100,
+    '3'   => 640,
+    '640' => 640,
+];
+$size = $size_map[$s] ?? 640;
+
+$link = 'https://q1.qlogo.cn/g?b=qq&nk=' . $qq . '&s=' . $size;
+api_redirect($link, 86400);
 ?>
