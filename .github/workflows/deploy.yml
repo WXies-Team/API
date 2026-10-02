@@ -27,7 +27,8 @@ jobs:
 
       # 纯 PHP 无构建步骤（沿用原 deploy.sh：只同步文件）
       # 直接覆盖：--delete 使服务器目录与仓库逐字一致
-      # .git / node_modules 被 exclude：不上传、也不删服务器上的现存副本
+      # .git / node_modules 不上传也不删；.user.ini / .well-known 为 aaPanel 面板托管
+      # （.user.ini 可能被 chattr 锁定，删它会以 rsync code 23 失败），同样保留
       - name: Deploy
         env:
           SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
@@ -43,6 +44,6 @@ jobs:
           trap 'rm -f "$KEY"' EXIT
           SSH_OPTS=(-i "$KEY" -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile="$KNOWN" -o BatchMode=yes)
           ssh "${SSH_OPTS[@]}" "$USER@$HOST" "mkdir -p '$DIR'"
-          rsync -a --delete --exclude='.git' --exclude='node_modules' \
+          rsync -a --delete --exclude='.git' --exclude='node_modules' --exclude='.user.ini' --exclude='.well-known' \
             -e "ssh ${SSH_OPTS[*]}" \
             "$GITHUB_WORKSPACE/" "$USER@$HOST:$DIR/"
