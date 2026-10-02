@@ -28,7 +28,9 @@ jobs:
       # 纯 PHP 无构建步骤（沿用原 deploy.sh：只同步文件）
       # 直接覆盖：--delete 使服务器目录与仓库逐字一致
       # .git / node_modules 不上传也不删；.user.ini / .well-known 为 aaPanel 面板托管
+      # .git/.github/.gitignore/.gitattributes/HANDOFF.md 为 git 专用，不同步也不留
       # （.user.ini 可能被 chattr 锁定，删它会以 rsync code 23 失败），同样保留
+      # .cache 为运行时缓存（自愈重建），保留在服务器不参与覆盖
       - name: Deploy
         env:
           SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
@@ -43,7 +45,9 @@ jobs:
           chmod 600 "$KEY"
           trap 'rm -f "$KEY"' EXIT
           SSH_OPTS=(-i "$KEY" -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile="$KNOWN" -o BatchMode=yes)
-          ssh "${SSH_OPTS[@]}" "$USER@$HOST" "mkdir -p '$DIR'"
-          rsync -a --delete --exclude='.git' --exclude='node_modules' --exclude='.user.ini' --exclude='.well-known' \
+          ssh "${SSH_OPTS[@]}" "$USER@$HOST" "mkdir -p '$DIR' && rm -rf $DIR/.git $DIR/.github $DIR/.gitignore $DIR/.gitattributes $DIR/HANDOFF.md"
+          rsync -a --delete \
+            --exclude='.git' --exclude='.github' --exclude='.gitignore' --exclude='.gitattributes' \
+            --exclude='HANDOFF.md' --exclude='node_modules' --exclude='.user.ini' --exclude='.well-known' --exclude='.cache' \
             -e "ssh ${SSH_OPTS[*]}" \
             "$GITHUB_WORKSPACE/" "$USER@$HOST:$DIR/"
