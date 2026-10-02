@@ -1,0 +1,48 @@
+name: deploy
+
+# push main 自动部署；workflow 自身/文档改动不触发（避免 Dependabot 升级 actions 后白跑部署）
+# workflow_dispatch 为手动入口，不受 paths 限制，可随时强制部署
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/**'
+      - '*.md'
+      - '**/*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 同分支并发只保留最后一次（对应旧 deploy.sh 锁文件的防重入）
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v7
+
+      # 纯 PHP 无构建步骤（沿用原 deploy.sh：只同步文件）
+      # 直接覆盖：--delete 使服务器目录与仓库逐字一致
+      # .git / node_modules 被 exclude：不上传、也不删服务器上的现存副本
+      - name: Deploy
+        env:
+          SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          HOST: ${{ secrets.SERVER_HOST }}
+          USER: ${{ secrets.SERVER_USER }}
+          DIR: ${{ secrets.SERVER_API_DIR }}
+        run: |
+          set -euo pipefail
+          KEY="$RUNNER_TEMP/deploy_key"
+          KNOWN="$RUNNER_TEMP/known_hosts"
+          printf '%s\n' "$SSH_KEY" > "$KEY"
+          chmod 600 "$KEY"
+          trap 'rm -f "$KEY"' EXIT
+          SSH_OPTS=(-i "$KEY" -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile="$KNOWN" -o BatchMode=yes)
+          ssh "${SSH_OPTS[@]}" "$USER@$HOST" "mkdir -p '$DIR'"
+          rsync -a --delete --exclude='.git' --exclude='node_modules' \
+            -e "ssh ${SSH_OPTS[*]}" \
+            "$GITHUB_WORKSPACE/" "$USER@$HOST:$DIR/"
