@@ -22,8 +22,11 @@ concurrency:
 jobs:
   deploy:
     runs-on: self-hosted
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       # 纯 PHP 无构建步骤（沿用原 deploy.sh：只同步文件）
       # 直接覆盖：--delete 使服务器目录与仓库逐字一致
